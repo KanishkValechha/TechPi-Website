@@ -2,32 +2,32 @@
 const customers = [
   {
     name: "DuPont",
-    logo: "/images/customers/dupont.svg",
+    logo: "../images/customers/DuPont.png",
     industry: "Chemical"
   },
   {
     name: "H & R Block",
-    logo: "/images/customers/hrblock.svg",
+    logo: "../images/customers/h-r-block.png", // Changed from "H&R-Block.png"
     industry: "Professional Services"
   },
   {
     name: "Bank of America",
-    logo: "/images/customers/bofa.svg",
+    logo: "../images/customers/bank.jpg",
     industry: "Banking"
   },
   {
     name: "NCR Corporation",
-    logo: "/images/customers/ncr.svg",
+    logo: "../images/customers/NCR.png",
     industry: "Technology"
   },
   {
     name: "Verizon",
-    logo: "/images/customers/verizon.svg",
+    logo: "../images/customers/verizon.png",
     industry: "Telecommunications"
   },
   {
     name: "Micron Technology",
-    logo: "/images/customers/micron.svg",
+    logo: "../images/customers/micron.png",
     industry: "Semiconductor"
   }
 ];
@@ -44,8 +44,8 @@ const customers = [
           <div class="flex-none w-64">
             <div class="bg-white p-6 rounded-lg shadow-md h-32 flex items-center justify-center">
               <div class="text-center">
-                <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-3 flex items-center justify-center">
-                  <span class="text-2xl font-bold text-primary">{customer.name[0]}</span>
+                <div class="w-16 h-16 bg-white rounded-full mx-auto mb-3 flex items-center justify-center">
+                  <img src={customer.logo} alt={customer.name} class="w-full h-full object-contain rounded-full z-10" />
                 </div>
                 <h3 class="font-semibold text-gray-800">{customer.name}</h3>
                 <p class="text-sm text-gray-500">{customer.industry}</p>
@@ -57,8 +57,8 @@ const customers = [
           <div class="flex-none w-64">
             <div class="bg-white p-6 rounded-lg shadow-md h-32 flex items-center justify-center">
               <div class="text-center">
-                <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-3 flex items-center justify-center">
-                  <span class="text-2xl font-bold text-primary">{customer.name[0]}</span>
+                <div class="w-16 h-16 bg-white rounded-full mx-auto mb-3 flex items-center justify-center">
+                  <img src={customer.logo} alt={customer.name} class="w-full h-full object-contain rounded-full" />
                 </div>
                 <h3 class="font-semibold text-gray-800">{customer.name}</h3>
                 <p class="text-sm text-gray-500">{customer.industry}</p>

@@ -100,12 +100,12 @@ const schema = {
 
   <!-- Certificate Modal -->
   <div id="certificateModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-white p-4 rounded-lg max-w-4xl w-full mx-4 flex flex-col place-items-center">
+    <div class="bg-white p-4 rounded-lg max-w-4xl w-full  mx-4 flex flex-col place-items-center">
       <div class="flex justify-between items-center mb-4 w-full">
         <h3 class="text-xl font-bold" id="modalTitle"></h3>
         <button id="closeModalBtn" class="text-2xl font-bold px-4 py-2">&times;</button>
       </div>
-      <img id="certificateImage" src="" alt="Certificate" class="h-[700px]" />
+      <img id="certificateImage" src="" alt="Certificate" class="h-[600px]" />
     </div>
   </div>
 
@@ -143,40 +143,38 @@ const schema = {
     </div>
   </section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Certificate buttons
-      const buttons = document.querySelectorAll('.certificate-btn');
-      buttons.forEach(button => {
-        button.addEventListener('click', () => {
-          const title = button.getAttribute('data-title');
-          const imageSrc = button.getAttribute('data-image');
-          if (title && imageSrc) {
-            showCertificate(title, imageSrc);
-          }
-        });
-      });
-
-      // Close button
-      const closeBtn = document.getElementById('closeModalBtn');
-      closeBtn?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeCertificateModal();
-      });
-
-      // Modal background click
-      const modal = document.getElementById('certificateModal');
-      modal?.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          closeCertificateModal();
+  <script type="module" astro-client-load>
+    // Certificate buttons
+    const buttons = document.querySelectorAll('.certificate-btn');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const title = button.getAttribute('data-title');
+        const imageSrc = button.getAttribute('data-image');
+        if (title && imageSrc) {
+          showCertificate(title, imageSrc);
         }
       });
+    });
+
+    // Close button
+    const closeBtn = document.getElementById('closeModalBtn');
+    closeBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeCertificateModal();
+    });
+
+    // Modal background click
+    const modal = document.getElementById('certificateModal');
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeCertificateModal();
+      }
     });
 
     function showCertificate(title, imageSrc) {
       const modal = document.getElementById('certificateModal');
       const modalTitle = document.getElementById('modalTitle');
-      const certificateImage = document.getElementById('certificateImage') as HTMLImageElement;
+      const certificateImage = document.getElementById('certificateImage');
       
       if (modal && modalTitle && certificateImage) {
         modalTitle.textContent = title;
