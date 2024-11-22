@@ -9,64 +9,64 @@ import StatsSection from '../components/StatsSection.astro';
 const schema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "Tech Manufacturing",
-  "description": "Leading manufacturer of Cable Trays and Low Voltage Panels",
+  "name": "Tech PI Solutions",
+  "description": "Leading CPRI approved, ISO certified manufacturer of LT Panels and Cable Trays",
   "url": "https://your-domain.com",
   "logo": "https://your-domain.com/logo.png",
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+1-555-123-4567",
     "contactType": "sales",
-    "areaServed": "Worldwide"
+    "areaServed": "India",
+    "location": "Hyderabad, Telangana"
   }
 };
 ---
 
 <Layout 
-  title="Home | Leading Cable Tray & LV Panel Manufacturer" 
-  description="Industry-leading manufacturer of Cable Trays and Low Voltage Panels. Quality products, expert services, and innovative solutions for your electrical infrastructure needs."
+title="Home | Tech PI Solutions - Leading LT Panel & Cable Tray Manufacturer" 
+description="CPRI approved, ISO certified manufacturer of LT Panels and Cable Trays. Providing superior quality products and services for industrial, commercial, and residential customers."
 >
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-  
-  <Hero />
-  
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-8">Why Choose Us?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform">
-          <div class="text-4xl mb-4 text-secondary">🏆</div>
-          <h3 class="text-xl font-bold mb-4">Quality Assurance</h3>
-          <p class="text-gray-600">ISO 9001:2015 certified manufacturing processes ensuring highest quality standards.</p>
-        </div>
-        <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform">
-          <div class="text-4xl mb-4 text-secondary">👥</div>
-          <h3 class="text-xl font-bold mb-4">Expert Team</h3>
-          <p class="text-gray-600">Experienced professionals dedicated to delivering excellence in every project.</p>
-        </div>
-        <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform">
-          <div class="text-4xl mb-4 text-secondary">💡</div>
-          <h3 class="text-xl font-bold mb-4">Innovation</h3>
-          <p class="text-gray-600">Cutting-edge technology and innovative solutions for modern infrastructure needs.</p>
-        </div>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<Hero />
+
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold mb-8">Why Choose Tech PI Solutions?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform">
+        <div class="text-4xl mb-4 text-secondary">🏆</div>
+        <h3 class="text-xl font-bold mb-4">Quality Excellence</h3>
+        <p class="text-gray-600">CPRI approved and ISO certified manufacturing processes ensuring superior quality products with advanced safety features.</p>
+      </div>
+      <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform">
+        <div class="text-4xl mb-4 text-secondary">👥</div>
+        <h3 class="text-xl font-bold mb-4">Expert Leadership</h3>
+        <p class="text-gray-600">Two decades of electrical industry expertise, handling complex projects with practical experience in developing unique market solutions.</p>
+      </div>
+      <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform">
+        <div class="text-4xl mb-4 text-secondary">🛠️</div>
+        <h3 class="text-xl font-bold mb-4">Comprehensive Service</h3>
+        <p class="text-gray-600">Round-the-clock technical support, installation services, personnel training, and dedicated after-sales support.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <StatsSection />
-  <ProductsPreview />
-  <ServicesPreview />
-  <CustomerSection />
+<CustomerSection />
+<StatsSection />
+<ProductsPreview />
+<ServicesPreview />
 
-  <section class="bg-primary text-white py-20">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-4xl font-bold mb-8">Ready to Transform Your Infrastructure?</h2>
-      <p class="text-xl mb-12 max-w-2xl mx-auto">
-        Let's discuss how our solutions can meet your specific requirements and enhance your electrical infrastructure.
-      </p>
-      <a href="/contact" class="inline-block bg-secondary text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-opacity-90 transform hover:scale-105 transition-all">
-        Start Your Project
-      </a>
-    </div>
-  </section>
+<section class="bg-primary text-white py-20">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold mb-8">Transform Your Electrical Infrastructure</h2>
+    <p class="text-xl mb-12 max-w-2xl mx-auto">
+      Partner with us for high-quality LT panels and cable trays that add economical value to your business while meeting the highest safety and quality standards.
+    </p>
+    <a href="/contact" class="inline-block bg-secondary text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-opacity-90 transform hover:scale-105 transition-all">
+      Start Your Project
+    </a>
+  </div>
+</section>
 </Layout>

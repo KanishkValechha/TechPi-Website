@@ -3,12 +3,12 @@ const products = [
   {
     title: "Cable Trays",
     description: "High-quality cable management solutions for industrial and commercial applications.",
-    image: "/images/cable-tray.jpg"
+    image: "../images/cable-trays.jpg"
   },
   {
     title: "Low Voltage Panels",
     description: "Custom-designed electrical distribution panels with advanced safety features.",
-    image: "/images/lv-panel.jpg"
+    image: "../images/Low-voltage(2).jpg"
   }
 ];
 ---
@@ -16,10 +16,12 @@ const products = [
 <section class="py-20">
   <div class="container mx-auto px-4">
     <h2 class="text-4xl font-bold text-center mb-12">Our Products</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-16">
       {products.map(product => (
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
-          <div class="aspect-video bg-gray-100"></div>
+          <div class="relative bg-gray-100 h-96 overflow-hidden">
+            <img src={product.image} alt={product.title} class="absolute inset-0 w-full h-full object-cover" />
+          </div>
           <div class="p-6">
             <h3 class="text-2xl font-bold mb-2">{product.title}</h3>
             <p class="text-gray-600 mb-4">{product.description}</p>

@@ -1,34 +1,34 @@
 ---
 const customers = [
   {
-    name: "TechCorp Industries",
-    logo: "/images/customers/techcorp.svg",
-    industry: "Manufacturing"
+    name: "DuPont",
+    logo: "/images/customers/dupont.svg",
+    industry: "Chemical"
   },
   {
-    name: "BuildRight Construction",
-    logo: "/images/customers/buildright.svg",
-    industry: "Construction"
+    name: "H & R Block",
+    logo: "/images/customers/hrblock.svg",
+    industry: "Professional Services"
   },
   {
-    name: "PowerGrid Solutions",
-    logo: "/images/customers/powergrid.svg",
-    industry: "Energy"
+    name: "Bank of America",
+    logo: "/images/customers/bofa.svg",
+    industry: "Banking"
   },
   {
-    name: "InfraTech Systems",
-    logo: "/images/customers/infratech.svg",
-    industry: "Infrastructure"
+    name: "NCR Corporation",
+    logo: "/images/customers/ncr.svg",
+    industry: "Technology"
   },
   {
-    name: "GlobalBuild Corp",
-    logo: "/images/customers/globalbuild.svg",
-    industry: "Construction"
+    name: "Verizon",
+    logo: "/images/customers/verizon.svg",
+    industry: "Telecommunications"
   },
   {
-    name: "ElectroPro Industries",
-    logo: "/images/customers/electropro.svg",
-    industry: "Electrical"
+    name: "Micron Technology",
+    logo: "/images/customers/micron.svg",
+    industry: "Semiconductor"
   }
 ];
 ---
@@ -53,6 +53,19 @@ const customers = [
             </div>
           </div>
         ))}
+        {customers.map((customer) => (
+          <div class="flex-none w-64">
+            <div class="bg-white p-6 rounded-lg shadow-md h-32 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-3 flex items-center justify-center">
+                  <span class="text-2xl font-bold text-primary">{customer.name[0]}</span>
+                </div>
+                <h3 class="font-semibold text-gray-800">{customer.name}</h3>
+                <p class="text-sm text-gray-500">{customer.industry}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </div>
@@ -64,11 +77,11 @@ const customers = [
       transform: translateX(0);
     }
     100% {
-      transform: translateX(calc(-256px * 3));
+      transform: translateX(calc(-256px * 6));
     }
   }
 
   .animate-scroll {
-    animation: scroll 30s linear infinite;
+    animation: scroll 60s linear infinite;
   }
 </style>

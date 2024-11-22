@@ -10,10 +10,25 @@ const navItems = [
 ---
 
 <header class="bg-primary text-white fixed w-full top-0 left-0 z-[100]">
-  <nav class="container mx-auto px-4 py-6">
+  <nav class="container mx-auto px-4 py-2">
     <div class="relative">
       <div class="flex justify-between items-center">
-        <a href="/" class="text-2xl font-bold">Tech Manufacturing</a>
+        <a href="/" class="flex items-center gap-4 group">
+          <div class="relative">
+            <div class="absolute -inset-0.5 rounded-full bg-gradient-to-r from-accent/40 to-primary/40 blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
+            <img 
+              src="../images/logo.jpg" 
+              alt="" 
+              class="w-20 h-20 rounded-full relative border border-white/20 shadow-lg transform group-hover:scale-[1.02] transition duration-300"
+            >
+          </div>
+          <div class="flex flex-col">
+            <h1 class="text-3xl font-bold tracking-tight">
+              <span class="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">TechPi</span>
+            </h1>
+            <span class="text-lg text-gray-400 font-medium tracking-wide">Manufacturing</span>
+          </div>
+        </a>
         
         <!-- Hamburger Menu Button -->
         <button
@@ -33,7 +48,7 @@ const navItems = [
             <li>
               <a 
                 href={item.href} 
-                class="hover:text-accent transition-colors duration-200"
+                class="hover:text-accent transition-colors duration-200 font-semibold"
               >
                 {item.text}
               </a>
@@ -72,7 +87,7 @@ const navItems = [
                   <li>
                     <a 
                       href={item.href} 
-                      class="mobile-link block text-lg font-medium hover:text-accent transition-all duration-200 transform hover:translate-x-2"
+                      class="mobile-link block text-lg hover:text-accent transition-all duration-200 transform hover:translate-x-2 font-semibold"
                       data-nav-link
                     >
                       {item.text}
@@ -100,7 +115,7 @@ const navItems = [
 </header>
 
 <!-- Spacer to prevent content from hiding under fixed header -->
-<div class="h-24"></div>
+<div class=" h-20"></div>
 
 <style>
   #menuButton span {

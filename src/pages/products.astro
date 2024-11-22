@@ -1,53 +1,72 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
 const products = {
   cableTrays: [
     {
       name: "Ladder Type Cable Trays",
-      description: "Heavy-duty cable support system ideal for industrial applications",
+      description: "Highly engineered cable management system designed and manufactured in an ergonomic way for various project requirements such as Under floor, Above Ceiling, Open Ceiling, Peripheries, and Shafts.",
+      images: [
+        "../images/cable-trays.jpg",
+        "../images/cable-trays(1).jpg"
+      ],
       features: [
-        "Hot-dip galvanized finish",
-        "High load-bearing capacity",
-        "Customizable dimensions",
-        "Easy installation"
+        "Pre-Galvanized or Hot Dip finish",
+        "Multiple width options available",
+        "Suitable for power, data, communication, and security systems",
+        "Complete with accessories like bends, T sections, reducers, brackets",
+        "Customizable to project requirements"
       ]
     },
     {
       name: "Perforated Cable Trays",
-      description: "Versatile solution for commercial and light industrial use",
+      description: "Professional cable management solution with perforated design, perfect for efficient cable organization and ventilation in commercial and industrial applications.",
+      images: [
+        "../images/cable-trays.jpg",
+        "../images/cable-trays(1).jpg"
+      ],
       features: [
-        "Ventilated design",
-        "Corrosion-resistant",
-        "Multiple width options",
-        "Cost-effective"
+        "Pre-Galvanized or Hot Dip finish options",
+        "Perforated design for better ventilation",
+        "Available with complete range of accessories",
+        "Suitable for under floor and ceiling mounting",
+        "Custom sizes and specifications available"
       ]
     }
   ],
   lvPanels: [
     {
-      name: "Distribution Panels",
-      description: "Efficient power distribution solutions for commercial buildings",
+      name: "Main LT Panels",
+      description: "CPRI approved panels designed as per IS/IEC standards, suitable for operating on 415 Volts 3 Phase 4 wire 50 Hz AC Supply up to 6000A current rating.",
+      images: [
+        "../images/cable-trays.jpg",
+        "../images/cable-trays(1).jpg"
+      ],
       features: [
-        "Circuit protection",
-        "Modular design",
-        "Smart metering options",
-        "IP54 protection"
+        "Current rating up to 6000A, 70kA fault level",
+        "Best Quality CRCA Sheets construction",
+        "Front access design for easy maintenance",
+        "Suitable for high ambient temperature operation",
+        "Withstands mechanical, electrical and thermal stresses"
       ]
     },
     {
-      name: "Control Panels",
-      description: "Advanced control systems for industrial automation",
+      name: "Power Control Center Panels",
+      description: "Comprehensive power control solutions including AMF/DG Synchronising panels, APFCR panels, and Motor control centre panels for industrial applications.",
+      images: [
+        "/images/pcc-1.jpg",
+        "/images/pcc-2.jpg",
+        "/images/pcc-3.jpg"
+      ],
       features: [
-        "PLC integration",
-        "Touch screen interface",
-        "Remote monitoring",
-        "Custom programming"
+        "AMF/DG Synchronising with PLC or load sharing technology",
+        "Automatic Power Factor Correction (APFCR)",
+        "Motor Control Centre (MCC) capabilities",
+        "Relay, Metering & Annunciation panels",
+        "Starter Panels with PLC/VFD integration"
       ]
     }
   ]
 };
-
 const schema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
@@ -69,15 +88,15 @@ const schema = {
 ---
 
 <Layout
-  title="Products"
-  description="Explore our range of high-quality Cable Trays and Low Voltage Panels. Engineered for reliability and performance."
+  title="Products | Tech PI Solutions"
+  description="Explore our range of CPRI approved LT Panels and Cable Trays. Engineered for reliability and superior performance."
 >
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   
   <div class="bg-primary text-white py-12">
     <div class="container mx-auto px-4">
       <h1 class="text-4xl font-bold mb-4">Our Products</h1>
-      <p class="text-xl">Engineered for excellence, built to last</p>
+      <p class="text-xl">Superior quality, engineered to excellence</p>
     </div>
   </div>
 
@@ -85,8 +104,26 @@ const schema = {
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-bold mb-12">Cable Trays</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-        {products.cableTrays.map(product => (
+        {products.cableTrays.map((product, productIndex) => (
           <div class="bg-white rounded-lg shadow-md p-8">
+            <div class="relative mb-6 h-64">
+              <div class="carousel-container h-full overflow-hidden">
+                <div 
+                  class="carousel-track flex transition-transform duration-300 h-full" 
+                  id={`carousel-${productIndex}`}
+                >
+                  {product.images.map((image, index) => (
+                    <div class="carousel-slide w-full h-full flex-shrink-0">
+                      <img 
+                        src={image}
+                        alt={`${product.name} view ${index + 1}`}
+                        class="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
             <h3 class="text-2xl font-bold mb-4">{product.name}</h3>
             <p class="text-gray-600 mb-6">{product.description}</p>
             <h4 class="font-semibold mb-3">Key Features:</h4>
@@ -101,8 +138,26 @@ const schema = {
 
       <h2 class="text-3xl font-bold mb-12">Low Voltage Panels</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {products.lvPanels.map(product => (
+        {products.lvPanels.map((product, productIndex) => (
           <div class="bg-white rounded-lg shadow-md p-8">
+            <div class="relative mb-6 h-64">
+              <div class="carousel-container h-full overflow-hidden">
+                <div 
+                  class="carousel-track flex transition-transform duration-300 h-full" 
+                  id={`carousel-${productIndex + products.cableTrays.length}`}
+                >
+                  {product.images.map((image, index) => (
+                    <div class="carousel-slide w-full h-full flex-shrink-0">
+                      <img 
+                        src={image}
+                        alt={`${product.name} view ${index + 1}`}
+                        class="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
             <h3 class="text-2xl font-bold mb-4">{product.name}</h3>
             <p class="text-gray-600 mb-6">{product.description}</p>
             <h4 class="font-semibold mb-3">Key Features:</h4>
@@ -116,12 +171,57 @@ const schema = {
       </div>
     </div>
   </section>
-
   <section class="bg-gray-50 py-16">
     <div class="container mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold mb-8">Need Custom Solutions?</h2>
-      <p class="text-xl text-gray-600 mb-8">We specialize in creating tailored solutions for your specific requirements.</p>
+      <p class="text-xl text-gray-600 mb-8">We specialize in creating tailored solutions meeting IS/IEC standards for your specific requirements.</p>
       <a href="/contact" class="inline-block bg-secondary text-white px-8 py-3 rounded-lg hover:bg-opacity-90">Contact Us</a>
     </div>
   </section>
+
+  <script>
+    class Carousel {
+      currentSlide: number;
+      slides: number;
+      track: HTMLElement;
+
+      constructor(element) {
+        this.track = element;
+        this.currentSlide = 0;
+        this.slides = element.children.length;
+      }
+
+      updatePosition() {
+        this.track.style.transform = `translateX(-${this.currentSlide * 100}%)`;
+      }
+
+      nextSlide() {
+        this.currentSlide = (this.currentSlide + 1) % this.slides;
+        this.updatePosition();
+      }
+
+      prevSlide() {
+        this.currentSlide = (this.currentSlide - 1 + this.slides) % this.slides;
+        this.updatePosition();
+      }
+    }
+
+    // Initialize carousels
+    document.addEventListener('DOMContentLoaded', () => {
+      const carousels = document.querySelectorAll('.carousel-track');
+      carousels.forEach((carousel) => {
+        const carouselInstance = new Carousel(carousel);
+        carousel.parentElement.id = carousel.id;
+        (carousel.parentElement as any).nextSlide = () => carouselInstance.nextSlide();
+        (carousel.parentElement as any).prevSlide = () => carouselInstance.prevSlide();
+      });
+
+      // Auto-scroll
+      setInterval(() => {
+        carousels.forEach((carousel) => {
+         (carousel.parentElement as any).nextSlide();
+        });
+      }, 5000);
+    });
+  </script>
 </Layout>
