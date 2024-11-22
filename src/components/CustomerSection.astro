@@ -1,0 +1,74 @@
+---
+const customers = [
+  {
+    name: "TechCorp Industries",
+    logo: "/images/customers/techcorp.svg",
+    industry: "Manufacturing"
+  },
+  {
+    name: "BuildRight Construction",
+    logo: "/images/customers/buildright.svg",
+    industry: "Construction"
+  },
+  {
+    name: "PowerGrid Solutions",
+    logo: "/images/customers/powergrid.svg",
+    industry: "Energy"
+  },
+  {
+    name: "InfraTech Systems",
+    logo: "/images/customers/infratech.svg",
+    industry: "Infrastructure"
+  },
+  {
+    name: "GlobalBuild Corp",
+    logo: "/images/customers/globalbuild.svg",
+    industry: "Construction"
+  },
+  {
+    name: "ElectroPro Industries",
+    logo: "/images/customers/electropro.svg",
+    industry: "Electrical"
+  }
+];
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-4">Trusted by Industry Leaders</h2>
+    <p class="text-xl text-gray-600 text-center mb-12">Delivering excellence to companies worldwide</p>
+    
+    <div class="overflow-hidden">
+      <div class="flex animate-scroll gap-8">
+        {customers.map((customer) => (
+          <div class="flex-none w-64">
+            <div class="bg-white p-6 rounded-lg shadow-md h-32 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-3 flex items-center justify-center">
+                  <span class="text-2xl font-bold text-primary">{customer.name[0]}</span>
+                </div>
+                <h3 class="font-semibold text-gray-800">{customer.name}</h3>
+                <p class="text-sm text-gray-500">{customer.industry}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-256px * 3));
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+</style>

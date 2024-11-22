@@ -1,0 +1,38 @@
+---
+const stats = [
+  {
+    number: "20+",
+    label: "Years Experience",
+    description: "Delivering excellence in manufacturing"
+  },
+  {
+    number: "1000+",
+    label: "Projects Completed",
+    description: "Across various industries"
+  },
+  {
+    number: "50+",
+    label: "Countries Served",
+    description: "Global presence and reach"
+  },
+  {
+    number: "100%",
+    label: "Quality Assured",
+    description: "ISO 9001:2015 certified"
+  }
+];
+---
+
+<section class="py-20 bg-primary text-white">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {stats.map((stat) => (
+        <div class="text-center">
+          <div class="text-4xl font-bold mb-2">{stat.number}</div>
+          <div class="text-xl font-semibold mb-1">{stat.label}</div>
+          <p class="text-gray-300">{stat.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

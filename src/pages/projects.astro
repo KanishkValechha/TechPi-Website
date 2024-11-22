@@ -1,0 +1,170 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projects = [
+  {
+    title: "Industrial Complex Power Distribution",
+    client: "TechCorp Industries",
+    location: "Dubai, UAE",
+    description: "Complete electrical infrastructure solution including cable trays and LV panels for a 500,000 sq ft industrial complex.",
+    image: "/images/project1.jpg",
+    year: "2023",
+    category: "Industrial"
+  },
+  {
+    title: "Smart City Infrastructure",
+    client: "Metropolitan Development Authority",
+    location: "Singapore",
+    description: "Smart power distribution system with integrated monitoring for a new urban development project.",
+    image: "/images/project2.jpg",
+    year: "2023",
+    category: "Urban Infrastructure"
+  },
+  {
+    title: "Data Center Power Management",
+    client: "Global Data Solutions",
+    location: "Frankfurt, Germany",
+    description: "High-capacity cable management system and redundant power distribution for a tier-4 data center.",
+    image: "/images/project3.jpg",
+    year: "2022",
+    category: "Data Centers"
+  },
+  {
+    title: "Manufacturing Plant Upgrade",
+    client: "AutoTech Manufacturing",
+    location: "Detroit, USA",
+    description: "Modernization of existing power distribution system with smart monitoring capabilities.",
+    image: "/images/project4.jpg",
+    year: "2022",
+    category: "Industrial"
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Our Projects",
+  "description": "Showcase of our successful electrical infrastructure projects worldwide",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": projects.map((project, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Project",
+        "name": project.title,
+        "description": project.description,
+        "location": project.location
+      }
+    }))
+  }
+};
+---
+
+<Layout
+  title="Projects | Tech Manufacturing"
+  description="Explore our portfolio of successful electrical infrastructure projects, showcasing our expertise in Cable Trays and Low Voltage Panels."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <div class="bg-primary text-white py-12">
+    <div class="container mx-auto px-4">
+      <h1 
+        class="text-4xl font-bold mb-4" 
+        data-aos="fade-up"
+      >
+        Our Projects
+      </h1>
+      <p 
+        class="text-xl" 
+        data-aos="fade-up" 
+        data-aos-delay="200"
+      >
+        Delivering excellence across the globe
+      </p>
+    </div>
+  </div>
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {projects.map((project, index) => (
+          <div 
+            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300"
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
+          >
+            <div class="aspect-video bg-gray-100 relative">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div class="absolute bottom-4 left-4 text-white">
+                <span class="px-3 py-1 bg-secondary rounded-full text-sm">
+                  {project.category}
+                </span>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">{project.title}</h3>
+              <div class="flex items-center gap-4 text-gray-600 mb-4 text-sm">
+                <span>{project.location}</span>
+                <span>•</span>
+                <span>{project.year}</span>
+              </div>
+              <p class="text-gray-600 mb-4 text-sm line-clamp-3">{project.description}</p>
+              <div class="flex justify-between items-center">
+                <span class="text-primary font-semibold text-sm">{project.client}</span>
+                <button class="text-secondary hover:text-primary transition-colors text-sm">
+                  View Details →
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section 
+    class="bg-gray-50 py-16"
+    data-aos="fade-up"
+  >
+    <div class="container mx-auto px-4 text-center">
+      <h2 
+        class="text-3xl font-bold mb-6"
+        data-aos="fade-up"
+      >
+        Ready to Start Your Project?
+      </h2>
+      <p 
+        class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        Let's discuss how we can help you achieve your infrastructure goals with our expertise and solutions.
+      </p>
+      <a 
+        href="/contact" 
+        class="inline-block bg-primary text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transform hover:scale-105 transition-all"
+        data-aos="fade-up"
+        data-aos-delay="400"
+      >
+        Contact Us
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Smooth scrolling for the entire page */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Hover effect for project cards */
+  .project-card {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+  }
+</style>

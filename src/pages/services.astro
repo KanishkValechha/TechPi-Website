@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    title: "Testing Services",
+    description: "Comprehensive testing and certification services for electrical equipment and systems.",
+    features: [
+      "Load testing for cable trays",
+      "Electrical safety testing",
+      "Performance verification",
+      "Quality assurance testing"
+    ],
+    icon: "⚡"
+  },
+  {
+    title: "Custom Solutions",
+    description: "Tailored manufacturing solutions to meet your specific project requirements.",
+    features: [
+      "Custom dimensions and specifications",
+      "Special material requirements",
+      "Project-specific modifications",
+      "Design consultation"
+    ],
+    icon: "🔧"
+  },
+  {
+    title: "Technical Support",
+    description: "Expert guidance and support throughout your project lifecycle.",
+    features: [
+      "Installation support",
+      "Maintenance guidance",
+      "Troubleshooting assistance",
+      "Technical documentation"
+    ],
+    icon: "💡"
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "provider": {
+    "@type": "Organization",
+    "name": "Tech Manufacturing"
+  },
+  "serviceType": "Electrical Equipment Testing and Manufacturing",
+  "areaServed": "Global",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "itemListElement": services.map((service, index) => ({
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": service.title,
+        "description": service.description
+      }
+    }))
+  }
+};
+---
+
+<Layout
+  title="Services"
+  description="Professional testing services, custom solutions, and expert technical support for electrical infrastructure projects."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <div class="bg-primary text-white py-12">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl font-bold mb-4">Our Services</h1>
+      <p class="text-xl">Professional solutions for your electrical infrastructure needs</p>
+    </div>
+  </div>
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 gap-12">
+        {services.map((service, index) => (
+          <div class="bg-white rounded-lg shadow-md p-8">
+            <div class="flex items-start gap-6">
+              <div class="text-4xl bg-gray-100 p-4 rounded-lg">{service.icon}</div>
+              <div class="flex-1">
+                <h2 class="text-3xl font-bold mb-4">{service.title}</h2>
+                <p class="text-gray-600 text-lg mb-6">{service.description}</p>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                  <h3 class="font-semibold mb-4">What we offer:</h3>
+                  <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {service.features.map(feature => (
+                      <li class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-50 py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-8">Ready to Get Started?</h2>
+      <p class="text-xl text-gray-600 mb-8">Contact us to discuss your project requirements and how we can help.</p>
+      <a href="/contact" class="inline-block bg-secondary text-white px-8 py-3 rounded-lg hover:bg-opacity-90">Contact Us</a>
+    </div>
+  </section>
+</Layout>

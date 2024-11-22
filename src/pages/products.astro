@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const products = {
+  cableTrays: [
+    {
+      name: "Ladder Type Cable Trays",
+      description: "Heavy-duty cable support system ideal for industrial applications",
+      features: [
+        "Hot-dip galvanized finish",
+        "High load-bearing capacity",
+        "Customizable dimensions",
+        "Easy installation"
+      ]
+    },
+    {
+      name: "Perforated Cable Trays",
+      description: "Versatile solution for commercial and light industrial use",
+      features: [
+        "Ventilated design",
+        "Corrosion-resistant",
+        "Multiple width options",
+        "Cost-effective"
+      ]
+    }
+  ],
+  lvPanels: [
+    {
+      name: "Distribution Panels",
+      description: "Efficient power distribution solutions for commercial buildings",
+      features: [
+        "Circuit protection",
+        "Modular design",
+        "Smart metering options",
+        "IP54 protection"
+      ]
+    },
+    {
+      name: "Control Panels",
+      description: "Advanced control systems for industrial automation",
+      features: [
+        "PLC integration",
+        "Touch screen interface",
+        "Remote monitoring",
+        "Custom programming"
+      ]
+    }
+  ]
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    ...products.cableTrays.map((product, index) => ({
+      "@type": "Product",
+      "position": index + 1,
+      "name": product.name,
+      "description": product.description
+    })),
+    ...products.lvPanels.map((product, index) => ({
+      "@type": "Product",
+      "position": index + products.cableTrays.length + 1,
+      "name": product.name,
+      "description": product.description
+    }))
+  ]
+};
+---
+
+<Layout
+  title="Products"
+  description="Explore our range of high-quality Cable Trays and Low Voltage Panels. Engineered for reliability and performance."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  
+  <div class="bg-primary text-white py-12">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl font-bold mb-4">Our Products</h1>
+      <p class="text-xl">Engineered for excellence, built to last</p>
+    </div>
+  </div>
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-12">Cable Trays</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+        {products.cableTrays.map(product => (
+          <div class="bg-white rounded-lg shadow-md p-8">
+            <h3 class="text-2xl font-bold mb-4">{product.name}</h3>
+            <p class="text-gray-600 mb-6">{product.description}</p>
+            <h4 class="font-semibold mb-3">Key Features:</h4>
+            <ul class="list-disc list-inside space-y-2 text-gray-600">
+              {product.features.map(feature => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="text-3xl font-bold mb-12">Low Voltage Panels</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {products.lvPanels.map(product => (
+          <div class="bg-white rounded-lg shadow-md p-8">
+            <h3 class="text-2xl font-bold mb-4">{product.name}</h3>
+            <p class="text-gray-600 mb-6">{product.description}</p>
+            <h4 class="font-semibold mb-3">Key Features:</h4>
+            <ul class="list-disc list-inside space-y-2 text-gray-600">
+              {product.features.map(feature => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-50 py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-8">Need Custom Solutions?</h2>
+      <p class="text-xl text-gray-600 mb-8">We specialize in creating tailored solutions for your specific requirements.</p>
+      <a href="/contact" class="inline-block bg-secondary text-white px-8 py-3 rounded-lg hover:bg-opacity-90">Contact Us</a>
+    </div>
+  </section>
+</Layout>

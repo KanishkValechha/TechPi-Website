@@ -1,0 +1,41 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-primary text-white mt-20">
+  <div class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-xl font-bold mb-4">Tech Manufacturing</h3>
+        <p>Leading manufacturer of Cable Trays and Low Voltage Panels</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="/products" class="hover:text-accent">Products</a></li>
+          <li><a href="/services" class="hover:text-accent">Services</a></li>
+          <li><a href="/projects" class="hover:text-accent">Projects</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-4">Contact</h3>
+        <ul class="space-y-2">
+          <li>Email: info@techmanufacturing.com</li>
+          <li>Phone: +1 (555) 123-4567</li>
+          <li>Address: 123 Manufacturing St</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold mb-4">Certifications</h3>
+        <ul class="space-y-2">
+          <li>ISO 9001:2015</li>
+          <li>CE Certified</li>
+          <li>UL Listed</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-gray-600 mt-8 pt-8 text-center">
+      <p>&copy; {currentYear} Tech Manufacturing. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const certifications = [
+  {
+    name: "ISO 9001:2015",
+    description: "Quality Management System certification ensuring consistent, high-quality manufacturing processes",
+    icon: "🏅"
+  },
+  {
+    name: "CE Certification",
+    description: "Products meet European health, safety, and environmental protection standards",
+    icon: "🌍"
+  },
+  {
+    name: "UL Listed",
+    description: "Products tested and certified to meet strict safety standards",
+    icon: "✓"
+  }
+];
+
+const founders = [
+  {
+    name: "John Smith",
+    position: "CEO & Co-founder",
+    bio: "With over 25 years of experience in electrical manufacturing, John has led the company's vision since its inception.",
+    image: "/images/founder1.jpg"
+  },
+  {
+    name: "Sarah Johnson",
+    position: "CTO & Co-founder",
+    bio: "A pioneer in electrical engineering, Sarah drives innovation and technical excellence across all product lines.",
+    image: "/images/founder2.jpg"
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Tech Manufacturing",
+    "description": "Leading manufacturer of Cable Trays and Low Voltage Panels since 2000",
+    "foundingDate": "2000",
+    "founder": founders.map(f => ({
+      "@type": "Person",
+      "name": f.name,
+      "jobTitle": f.position
+    }))
+  }
+};
+---
+
+<Layout
+  title="About Us | Tech Manufacturing"
+  description="Learn about Tech Manufacturing's journey, our founders, and our commitment to quality through international certifications."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <div class="bg-primary text-white py-12">
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl font-bold mb-4">About Us</h1>
+      <p class="text-xl">Our journey of excellence in electrical infrastructure</p>
+    </div>
+  </div>
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Our Story</h2>
+        <div class="prose prose-lg">
+          <p class="mb-4">
+            Founded in 2000, Tech Manufacturing has grown from a small local manufacturer to a global leader in electrical infrastructure solutions. Our commitment to quality, innovation, and customer satisfaction has driven our success over the past two decades.
+          </p>
+          <p class="mb-4">
+            We specialize in manufacturing high-quality Cable Trays and Low Voltage Panels, serving industries across the globe. Our state-of-the-art manufacturing facility combines advanced technology with skilled craftsmanship to deliver products that meet the highest international standards.
+          </p>
+          <p>
+            Today, we continue to innovate and expand our capabilities, staying at the forefront of electrical infrastructure solutions while maintaining our core values of quality, reliability, and customer service.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-12 text-center">Our Founders</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {founders.map(founder => (
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="aspect-square bg-gray-100"></div>
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2">{founder.name}</h3>
+              <p class="text-secondary font-semibold mb-4">{founder.position}</p>
+              <p class="text-gray-600">{founder.bio}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-12 text-center">Our Certifications</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        {certifications.map(cert => (
+          <div class="bg-white rounded-lg shadow-md p-6 text-center">
+            <div class="text-4xl mb-4">{cert.icon}</div>
+            <h3 class="text-xl font-bold mb-2">{cert.name}</h3>
+            <p class="text-gray-600">{cert.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-primary text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-6">Join Our Journey</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">
+        Be part of our mission to transform electrical infrastructure worldwide.
+      </p>
+      <a href="/contact" class="inline-block bg-secondary text-white px-8 py-3 rounded-lg hover:bg-opacity-90">
+        Get in Touch
+      </a>
+    </div>
+  </section>
+</Layout>

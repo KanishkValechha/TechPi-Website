@@ -1,0 +1,37 @@
+---
+const services = [
+  {
+    title: "Testing Services",
+    description: "Comprehensive testing and certification for electrical equipment.",
+    icon: "⚡"
+  },
+  {
+    title: "Custom Solutions",
+    description: "Tailored manufacturing solutions for specific project requirements.",
+    icon: "🔧"
+  },
+  {
+    title: "Technical Support",
+    description: "Expert guidance and support throughout your project lifecycle.",
+    icon: "💡"
+  }
+];
+---
+
+<section class="bg-gray-50 py-20">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold text-center mb-12">Our Services</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {services.map(service => (
+        <div class="bg-white p-8 rounded-lg shadow-md text-center">
+          <div class="text-4xl mb-4">{service.icon}</div>
+          <h3 class="text-xl font-bold mb-2">{service.title}</h3>
+          <p class="text-gray-600">{service.description}</p>
+        </div>
+      ))}
+    </div>
+    <div class="text-center mt-12">
+      <a href="/services" class="inline-block bg-primary text-white px-8 py-3 rounded-lg hover:bg-opacity-90">View All Services</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,212 @@
+---
+const navItems = [
+  { href: '/', text: 'Home' },
+  { href: '/products', text: 'Products' },
+  { href: '/services', text: 'Services' },
+  { href: '/projects', text: 'Projects' },
+  { href: '/about', text: 'About Us' },
+  { href: '/contact', text: 'Contact' },
+];
+---
+
+<header class="bg-primary text-white fixed w-full top-0 left-0 z-[100]">
+  <nav class="container mx-auto px-4 py-6">
+    <div class="relative">
+      <div class="flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold">Tech Manufacturing</a>
+        
+        <!-- Hamburger Menu Button -->
+        <button
+          id="menuButton"
+          class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <span class="w-6 h-0.5 bg-white transition-transform origin-center"></span>
+          <span class="w-6 h-0.5 bg-white transition-opacity"></span>
+          <span class="w-6 h-0.5 bg-white transition-transform origin-center"></span>
+        </button>
+
+        <!-- Desktop Navigation -->
+        <ul class="hidden md:flex space-x-8">
+          {navItems.map(item => (
+            <li>
+              <a 
+                href={item.href} 
+                class="hover:text-accent transition-colors duration-200"
+              >
+                {item.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Redesigned Mobile Navigation -->
+      <div
+        id="mobileMenu"
+        class="fixed inset-0 bg-black bg-opacity-50 md:hidden hidden z-[150]"
+        style="backdrop-filter: blur(4px);"
+      >
+        <div class="fixed inset-y-0 right-0 max-w-xs w-full bg-primary shadow-lg transform transition-transform duration-300 ease-in-out translate-x-full z-[160]"
+             id="slidePanel">
+          <div class="flex flex-col h-full">
+            <!-- Mobile Menu Header with Close Button -->
+            <div class="px-6 py-4 border-b border-white/10 flex justify-between items-center">
+              <h2 class="text-xl font-bold">Menu</h2>
+              <button 
+                id="closeButton" 
+                class="p-2 hover:bg-white/10 rounded-full transition-colors"
+                aria-label="Close menu"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <!-- Mobile Menu Items -->
+            <nav class="flex-1 px-6 py-4 overflow-y-auto">
+              <ul class="space-y-6">
+                {navItems.map(item => (
+                  <li>
+                    <a 
+                      href={item.href} 
+                      class="mobile-link block text-lg font-medium hover:text-accent transition-all duration-200 transform hover:translate-x-2"
+                      data-nav-link
+                    >
+                      {item.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            
+            <!-- Mobile Menu Footer -->
+            <div class="border-t border-white/10 px-6 py-4">
+              <a 
+                href="/contact" 
+                class="mobile-link block text-center py-3 px-4 bg-accent rounded-lg hover:bg-accent/90 transition-colors duration-200"
+                data-nav-link
+              >
+                Contact Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Spacer to prevent content from hiding under fixed header -->
+<div class="h-24"></div>
+
+<style>
+  #menuButton span {
+    transition: all 0.3s ease-in-out;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  function setupMobileMenu() {
+    const menuButton = document.getElementById('menuButton');
+    const closeButton = document.getElementById('closeButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const slidePanel = document.getElementById('slidePanel');
+    const menuBars = menuButton?.querySelectorAll('span');
+    let isMenuOpen = false;
+
+    function closeMenu() {
+      if (!isMenuOpen) return;
+      
+      isMenuOpen = false;
+      document.body.classList.remove('menu-open');
+      
+      if (slidePanel) {
+        slidePanel.classList.add('translate-x-full');
+      }
+      
+      // Wait for slide animation to complete before hiding menu
+      setTimeout(() => {
+        if (mobileMenu) {
+          mobileMenu.classList.add('hidden');
+        }
+      }, 300);
+
+      if (menuButton) {
+        menuButton.setAttribute('aria-expanded', 'false');
+      }
+      
+      if (menuBars && menuBars.length === 3) {
+        menuBars[0].classList.remove('rotate-45', 'translate-y-2');
+        menuBars[1].classList.remove('opacity-0');
+        menuBars[2].classList.remove('-rotate-45', '-translate-y-2');
+      }
+    }
+
+    function openMenu() {
+      if (isMenuOpen) return;
+      
+      isMenuOpen = true;
+      document.body.classList.add('menu-open');
+      
+      if (mobileMenu) {
+        mobileMenu.classList.remove('hidden');
+        // Small delay to ensure the menu is visible before sliding
+        setTimeout(() => {
+          if (slidePanel) {
+            slidePanel.classList.remove('translate-x-full');
+          }
+        }, 10);
+      }
+
+      if (menuButton) {
+        menuButton.setAttribute('aria-expanded', 'true');
+      }
+      
+      if (menuBars && menuBars.length === 3) {
+        menuBars[0].classList.add('rotate-45', 'translate-y-2');
+        menuBars[1].classList.add('opacity-0');
+        menuBars[2].classList.add('-rotate-45', '-translate-y-2');
+      }
+    }
+
+    function toggleMenu() {
+      if (isMenuOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    // Event Listeners
+    menuButton?.addEventListener('click', toggleMenu);
+    closeButton?.addEventListener('click', closeMenu);
+    
+    // Close menu when clicking outside
+    mobileMenu?.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) {
+        closeMenu();
+      }
+    });
+
+    // Handle mobile navigation links
+    const mobileLinks = document.querySelectorAll('[data-nav-link]');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
+  }
+
+  // Initialize menu on page load
+  setupMobileMenu();
+
+  // Re-initialize menu after Astro page transitions
+  document.addEventListener('astro:page-load', setupMobileMenu);
+</script>
