@@ -1,11 +1,38 @@
 ---
 const navItems = [
-  { href: '/', text: 'Home' },
-  { href: '/products', text: 'Products' },
-  { href: '/services', text: 'Services' },
-  { href: '/projects', text: 'Projects' },
-  { href: '/about', text: 'About Us' },
-  { href: '/contact', text: 'Contact' },
+  { 
+    href: '/', 
+    text: 'Home' 
+  },
+  { 
+    href: '/products', 
+    text: 'Products',
+    dropdown: [
+      { href: '/products#panels', text: 'Low Voltage Panels' },
+      { href: '/products#trays', text: 'Cable Trays' },
+    ]
+  },
+  { 
+    href: '/services', 
+    text: 'Services' 
+  },
+  { 
+    href: '/projects', 
+    text: 'Projects' 
+  },
+  { 
+    href: '/about', 
+    text: 'About Us',
+    dropdown: [
+      { href: '/about#story', text: 'Our Story' },
+      { href: '/about#founders', text: 'Our Founders' },
+      { href: '/about#certificates', text: 'Certificates' }
+    ]
+  },
+  { 
+    href: '/contact', 
+    text: 'Contact' 
+  },
 ];
 ---
 
@@ -24,7 +51,8 @@ const navItems = [
           </div>
           <div class="flex flex-col">
             <h1 class="text-3xl font-bold tracking-tight">
-              <span class="">TechPi</span>
+                <span class="">TechPI </span>
+                <span class="font-medium">&reg;</span>
             </h1>
             <span class="company-name text-lg text-accent/90 font-medium tracking-widest uppercase">Solutions</span>
           </div>
@@ -45,13 +73,39 @@ const navItems = [
         <!-- Desktop Navigation -->
         <ul class="hidden md:flex space-x-8">
           {navItems.map(item => (
-            <li>
+            <li class="relative group">
               <a 
                 href={item.href} 
-                class="hover:text-accent transition-colors duration-200 font-semibold"
+                class="desktop-link hover:text-accent transition-colors duration-200 font-semibold flex items-center gap-1"
               >
                 {item.text}
+                {item.dropdown && (
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    class="h-4 w-4 transform group-hover:rotate-180 transition-transform duration-200" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                )}
               </a>
+              
+              {item.dropdown && (
+                <div class="absolute left-0 mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-left group-hover:translate-y-0 translate-y-2">
+                  <div class="py-2 bg-primary rounded-lg shadow-xl border border-white/10">
+                    {item.dropdown.map(subItem => (
+                      <a
+                        href={subItem.href}
+                        class="desktop-link block px-4 py-2 text-sm hover:bg-white/10 hover:text-accent transition-colors duration-200 subitem-link"
+                      >
+                        {subItem.text}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -118,6 +172,10 @@ const navItems = [
 <div class=" h-20"></div>
 
 <style>
+  html {
+    scroll-padding-top: 110px; /* Adjust based on your navbar height */
+  }
+  
   #menuButton span {
     transition: all 0.3s ease-in-out;
   }
@@ -219,9 +277,84 @@ const navItems = [
     });
   }
 
+  function setupDesktopMenu() {
+    // Handle desktop navigation links with offset
+    const desktopLinks = document.querySelectorAll('.desktop-link');
+    desktopLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        const [path, hash] = href.split('#');
+        if (hash) {
+          e.preventDefault();
+          if (window.location.pathname === path) {
+            scrollToHash(hash);
+          } else {
+            window.location.href = href;
+          }
+        }
+      });
+    });
+
+    // Handle hash change for offset
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        scrollToHash(hash);
+      }
+    });
+
+    // Handle page load with hash for offset
+    window.addEventListener('load', () => {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        scrollToHash(hash);
+      }
+    });
+
+    // Handle popstate for offset
+    window.addEventListener('popstate', () => {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        scrollToHash(hash);
+      }
+    });
+  }
+
+  function scrollToHash(hash) {
+    const attemptScroll = (retries = 10, delay = 100) => {
+      const targetElement = document.getElementById(hash);
+      if (targetElement) {
+        const offset = 110; // Adjust this value based on your navbar height
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - offset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      } else if (retries > 0) {
+        setTimeout(() => attemptScroll(retries - 1, delay), delay);
+      }
+    };
+
+    attemptScroll();
+  }
+
   // Initialize menu on page load
   setupMobileMenu();
+  setupDesktopMenu();
 
   // Re-initialize menu after Astro page transitions
-  document.addEventListener('astro:page-load', setupMobileMenu);
+  document.addEventListener('astro:page-load', () => {
+    setupMobileMenu();
+    setupDesktopMenu();
+    
+    // Add this to handle hash after page transition with delay
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      scrollToHash(hash);
+      setTimeout(() => {
+        scrollToHash(hash);
+      }, 300); // Adjust the delay as needed
+    }
+  });
 </script>

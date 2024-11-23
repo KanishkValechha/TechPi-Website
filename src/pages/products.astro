@@ -83,10 +83,43 @@ const schema = {
       <p class="text-xl">Superior quality, engineered to excellence</p>
     </div>
   </div>
-
+  
   <section class="py-16">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-12">Cable Trays</h2>
+      <h2 class="text-3xl font-bold mb-12" id="panels">Low Voltage Panels</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 lg:px-24">
+        {products.lvPanels.map((product, productIndex) => (
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="relative mb-4 h-72">
+              <div class="carousel-container h-full overflow-hidden">
+                <div 
+                  class="carousel-track flex transition-transform duration-300 h-full" 
+                  id={`carousel-${productIndex + products.cableTrays.length}`}
+                >
+                  {product.images.map((image, index) => (
+                    <div class="carousel-slide w-full h-full flex-shrink-0">
+                      <img 
+                        src={image}
+                        alt={`${product.name} view ${index + 1}`}
+                        class="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">{product.name}</h3>
+            <p class="text-gray-600 mb-6">{product.description}</p>
+            <h4 class="font-semibold mb-3">Key Features:</h4>
+            <ul class="list-disc list-inside space-y-2 text-gray-600">
+              {product.features.map(feature => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <h2 class="text-3xl font-bold mb-12" id="trays">Cable Trays</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 lg:px-24">
         {products.cableTrays.map((product, productIndex) => (
           <div class="bg-white rounded-lg shadow-md p-6">
@@ -120,39 +153,6 @@ const schema = {
         ))}
       </div>
 
-      <h2 class="text-3xl font-bold mb-12">Low Voltage Panels</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:px-24">
-        {products.lvPanels.map((product, productIndex) => (
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="relative mb-4 h-72">
-              <div class="carousel-container h-full overflow-hidden">
-                <div 
-                  class="carousel-track flex transition-transform duration-300 h-full" 
-                  id={`carousel-${productIndex + products.cableTrays.length}`}
-                >
-                  {product.images.map((image, index) => (
-                    <div class="carousel-slide w-full h-full flex-shrink-0">
-                      <img 
-                        src={image}
-                        alt={`${product.name} view ${index + 1}`}
-                        class="w-full h-full object-cover rounded-lg"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <h3 class="text-2xl font-bold mb-4">{product.name}</h3>
-            <p class="text-gray-600 mb-6">{product.description}</p>
-            <h4 class="font-semibold mb-3">Key Features:</h4>
-            <ul class="list-disc list-inside space-y-2 text-gray-600">
-              {product.features.map(feature => (
-                <li>{feature}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
     </div>
   </section>
   <section class="bg-gray-50 py-16">

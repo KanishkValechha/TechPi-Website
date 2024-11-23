@@ -1,34 +1,190 @@
 ---
+import { motion } from 'framer-motion';
+
 const products = [
-  {
-    title: "Cable Trays",
-    description: "High-quality cable management solutions for industrial and commercial applications.",
-    image: "../images/cable-trays.jpg"
-  },
   {
     title: "Low Voltage Panels",
     description: "Custom-designed electrical distribution panels with advanced safety features.",
-    image: "../images/Low-voltage(2).jpg"
-  }
+    images: [
+      "../images/Low-voltage(2).jpg",
+      "../images/Low-voltage.jpg",
+      "../images/Low-voltage.jpg"
+    ]
+  },
+  {
+    title: "Cable Trays",
+    description: "High-quality cable management solutions for industrial and commercial applications.",
+    images: [
+      "../images/cable-trays.jpg",
+      "../images/cable-trays(1).jpg",
+      "../images/cable-trays.jpg"
+    ]
+  },
 ];
+
+// Make products available to client-side JavaScript
+const productsJson = JSON.stringify(products);
 ---
 
 <section class="py-20">
   <div class="container mx-auto px-12">
     <h2 class="text-4xl font-bold text-center mb-12">Our Products</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:px-16">
-      {products.map(product => (
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-          <div class="relative bg-gray-100 h-96 overflow-hidden">
-            <img src={product.image} alt={product.title} class="absolute inset-0 w-full h-full object-cover" />
+      {products.map((product, index) => (
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-transform hover:scale-[1.02]">
+          <div class="relative bg-gray-100 h-96 overflow-hidden group">
+            <button data-action="prev" data-index={index} 
+              class="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-md transition-opacity duration-300 bg-white disabled:opacity-50">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              </svg>
+            </button>
+            
+            <div class="slider-container w-full h-full relative">
+              <div id={`slider-${index}`} class="slider-track absolute w-full h-full flex transition-transform duration-500 ease-in-out">
+                {product.images.map((img, imgIndex) => (
+                  <div class="slide w-full h-full flex-shrink-0">
+                    <img src={img} alt={`${product.title} ${imgIndex + 1}`} 
+                      class="w-full h-full object-cover" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <button data-action="next" data-index={index}
+              class="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-md transition-opacity duration-300 bg-white disabled:opacity-50">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </button>
+
+            <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+              {product.images.map((_, imgIndex) => (
+                <div data-index={imgIndex} data-product={index} 
+                  class="w-2 h-2 rounded-full bg-white/60 cursor-pointer transition-all duration-300 image-indicator">
+                </div>
+              ))}
+            </div>
           </div>
           <div class="p-6">
             <h3 class="text-2xl font-bold mb-2">{product.title}</h3>
             <p class="text-gray-600 mb-4">{product.description}</p>
-            <a href="/products" class="text-primary hover:text-secondary font-semibold">Learn More →</a>
+            <a href="/products" class="inline-block text-primary hover:text-secondary font-semibold transition-colors duration-300">
+              Learn More →
+            </a>
           </div>
         </div>
       ))}
     </div>
   </div>
+
+  <style>
+    .slider-container {
+      overflow: hidden;
+    }
+    .slider-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+    .slide {
+      flex: 0 0 100%;
+    }
+  </style>
+
+  <script define:vars={{ productsJson }}>
+    const products = JSON.parse(productsJson);
+    let isTransitioning = false;
+    const currentImageIndices = products.map(() => 0);
+    const navbarHeight = document.querySelector('nav').offsetHeight;
+
+    function updateIndicators(productIndex, activeIndex) {
+      const indicators = document.querySelectorAll(`[data-product="${productIndex}"].image-indicator`);
+      indicators.forEach((indicator, index) => {
+        if (index === activeIndex) {
+          indicator.classList.remove('bg-white/60');
+          indicator.classList.add('bg-white');
+        } else {
+          indicator.classList.remove('bg-white');
+          indicator.classList.add('bg-white/60');
+        }
+      });
+    }
+
+    function slideImages(productIndex, newIndex) {
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      const sliderTrack = document.getElementById(`slider-${productIndex}`);
+      sliderTrack.style.transform = `translateX(-${newIndex * 100}%)`;
+      
+      currentImageIndices[productIndex] = newIndex;
+      updateIndicators(productIndex, newIndex);
+
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 500);
+    }
+
+    function scrollToElement(element) {
+      const offset = navbarHeight + 20; // Adjust the offset as needed
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+
+    // Add click handlers for navigation buttons
+    document.querySelectorAll('button[data-action]').forEach(button => {
+      button.addEventListener('click', () => {
+        if (isTransitioning) return;
+
+        const action = button.dataset.action;
+        const index = parseInt(button.dataset.index);
+        const currentIndex = currentImageIndices[index];
+        const totalImages = products[index].images.length;
+
+        let newIndex;
+        if (action === 'prev') {
+          newIndex = currentIndex === 0 ? totalImages - 1 : currentIndex - 1;
+        } else {
+          newIndex = currentIndex === totalImages - 1 ? 0 : currentIndex + 1;
+        }
+
+        slideImages(index, newIndex);
+      });
+    });
+
+    // Add click handlers for indicators
+    document.querySelectorAll('.image-indicator').forEach(indicator => {
+      indicator.addEventListener('click', () => {
+        if (isTransitioning) return;
+
+        const productIndex = parseInt(indicator.dataset.product);
+        const imageIndex = parseInt(indicator.dataset.index);
+        
+        if (currentImageIndices[productIndex] !== imageIndex) {
+          slideImages(productIndex, imageIndex);
+        }
+      });
+    });
+
+    // Add click handlers for links to scroll with offset
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          scrollToElement(targetElement);
+        }
+      });
+    });
+
+    // Initialize indicators
+    products.forEach((_, index) => updateIndicators(index, 0));
+  </script>
 </section>
