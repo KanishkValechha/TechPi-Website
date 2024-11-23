@@ -1,19 +1,39 @@
 ---
+import { desc } from 'framer-motion/client';
 import Layout from '../layouts/Layout.astro';
 
 const certifications = [
   {
-    name: "CPRI Approval",
-    description: "Certified by Central Power Research Institute for LT panels up to 6000A, 70kA fault level",
-    icon: "🏅",
-    certificateImage: "../images/cpri.png"  // Updated path
-  },
-  {
     name: "ISO Certification",
     description: "ISO certified manufacturing processes ensuring superior quality products and services",
     icon: "✓",
-    certificateImage: "../images/iso.png"
-  }
+    certificateImage: "../images/certificates/iso.png"
+  },
+  {
+    name: "CPRI(Short Circuit) Certificate",
+    description: "Certified by Central Power Research Institute for LT panels up to 6000A, 70kA fault level",
+    icon: "🏅",
+    certificateImage: "../images/certificates/cpri.png"  // Updated path
+  },
+  {
+    name: "Qality Research Organization Certificate",
+    description: "Certified by Quality Research Organization for superior quality products and services",
+    icon: "✓",
+    certificateImage: "../images/certificates/qro.png"
+  },
+  {
+    name: "CPRI(Temperature Test) Certificate",
+    description: "Certified by Central Power Research Institute for LT panels up to 6000A, 70kA fault level",
+    icon: "🏅",
+    certificateImage: "../images/certificates/temperature.png"
+  },
+  {
+    name: "CPRI Provisional Test Certificate",
+    description: "Certified by Central Power Research Institute for LT panels up to 6000A, 70kA fault level",
+    icon: "🏅",
+    certificateImage: "../images/certificates/test.png"
+  },
+  
 ];
 
 const founders = [
