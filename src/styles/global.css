@@ -1,0 +1,11 @@
+/* ...existing styles... */
+@import url("https://fonts.googleapis.com/css2?family=Lugrasimo&display=swap");
+/* Additional styles for animations */
+.animate-fade-in {
+  @apply animate-fade-in;
+}
+
+.animate-scroll {
+  @apply animate-scroll;
+}
+

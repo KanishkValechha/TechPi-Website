@@ -1,6 +1,7 @@
 ---
 import { desc } from 'framer-motion/client';
 import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const certifications = [
   {
@@ -41,13 +42,13 @@ const founders = [
     name: "Aruna Kumar SS",
     position: "Director",
     bio: "With over two decades of experience in electrical supply and contracting, Mr. Aruna Kumar is one of the strong pillars of Tech PI Solutions. His technical expertise and leadership has established strong client relationships and successful project delivery across India.",
-    image: "/images/aruna-kumar.jpg"
+    image: "/images/a.jpg"
   },
   {
     name: "Jeevana B S",
     position: "Director",
     bio: "Having 19 years of experience in the electrical supply and distribution industry, Mr. Jeevana is a visionary leader with strong determination and ethical beliefs. His passion for innovation and quality has driven successful projects both in India and overseas.",
-    image: "/images/jeevana.jpg"
+    image: "/images/b.jpg"
   }
 ];
 
@@ -74,12 +75,11 @@ const schema = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
-  <div class="bg-primary text-white py-12">
-    <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-bold mb-4">About Us</h1>
-      <p class="text-xl">Excellence in electrical infrastructure solutions</p>
-    </div>
-  </div>
+  <PageHeader
+    title="Our Services"
+    description="Professional solutions for your electrical infrastructure needs"
+    image="/images/facility.jpg"
+  />
 
   <section class="py-16" id="story">
     <div class="container mx-auto px-4">
@@ -106,7 +106,7 @@ const schema = {
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         {founders.map(founder => (
           <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <img src={founder.image} alt={founder.name} class="w-full aspect-square object-cover" />
+            <img src={founder.image} alt={founder.name} class="w-full aspect-square object-fit" />
             <div class="p-6">
               <h3 class="text-2xl font-bold mb-2">{founder.name}</h3>
               <p class="text-secondary font-semibold mb-4">{founder.position}</p>

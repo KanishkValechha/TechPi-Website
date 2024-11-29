@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const projects = [
   {
@@ -67,23 +68,11 @@ const schema = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
-  <div class="bg-primary text-white py-12">
-    <div class="container mx-auto px-4">
-      <h1 
-        class="text-4xl font-bold mb-4" 
-        data-aos="fade-up"
-      >
-        Our Projects
-      </h1>
-      <p 
-        class="text-xl" 
-        data-aos="fade-up" 
-        data-aos-delay="200"
-      >
-        Delivering excellence across the globe
-      </p>
-    </div>
-  </div>
+  <PageHeader
+    title="Our Services"
+    description="Professional solutions for your electrical infrastructure needs"
+    image="/images/facility.jpg"
+  />
 
   <section class="py-16">
     <div class="container mx-auto px-4">

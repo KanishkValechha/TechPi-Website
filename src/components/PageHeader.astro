@@ -1,0 +1,41 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+}
+
+const { title, description, image } = Astro.props;
+---
+
+<div class="relative h-[40vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+  <!-- Background Image -->
+  <div class="absolute inset-0">
+    <img 
+      src={image} 
+      alt={title}
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70"></div>
+  </div>
+  
+  <!-- Content -->
+  <div 
+    class="relative container mx-auto px-4 text-white text-center"
+    data-aos="fade-up"
+  >
+    <h1 class="text-4xl md:text-6xl font-bold mb-4 font-display">
+      {title}
+    </h1>
+    <p class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+      {description}
+    </p>
+  </div>
+
+  <!-- Decorative Elements -->
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg class="w-full h-16 text-white" preserveAspectRatio="none" viewBox="0 0 100 100">
+      <path d="M0 100 C 20 0 50 0 100 100 Z" fill="currentColor"/>
+    </svg>
+  </div>
+</div>

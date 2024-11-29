@@ -50,9 +50,9 @@ const navItems = [
             >
           </div>
           <div class="flex flex-col">
-            <h1 class="text-3xl font-bold tracking-tight">
-                <span class="">TechPI </span>
-                <span class="font-medium">&reg;</span>
+            <h1 class="text-3xl font-bold tracking-widest">
+                <span class="headerr">TECHPi</span>
+                <span class="font-medium tracking-tighter">&reg;</span>
             </h1>
             <span class="company-name text-lg text-accent/90 font-medium tracking-widest uppercase">Solutions</span>
           </div>
@@ -172,6 +172,7 @@ const navItems = [
 <div class=" h-20"></div>
 
 <style>
+  
   html {
     scroll-padding-top: 110px; /* Adjust based on your navbar height */
   }
@@ -183,6 +184,22 @@ const navItems = [
   body.menu-open {
     overflow: hidden;
   }
+  @font-face {
+  font-family: 'Accelerator',sans-serif;
+  src: url('../assets/fonts/Accelerator.woff2') format('woff2'),
+    url('../assets/fonts/Accelerator.woff') format('woff'),
+    url('../assets/fonts/Accelerator.otf') format('opentype'),
+    url('../assets/fonts/Accelerator.ttf') format('truetype');
+    font-weight: light;
+  }
+  @font-face {
+    font-family: 'Paladins';
+    src: url(../assets/fonts/paladinsstraight.ttf) format('truetype');
+  }
+
+.headerr{
+  font-family: 'Paladins';
+}
 </style>
 
 <script>

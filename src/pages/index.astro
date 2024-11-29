@@ -30,31 +30,63 @@ description="CPRI approved, ISO certified manufacturer of LT Panels and Cable Tr
 
 <Hero />
 
-<section class="py-16 bg-gray-50">
-  <div class="container mx-auto px-12 text-center">
-    <h2 class="text-3xl font-bold mb-8">Why Choose Tech PI Solutions?</h2>
+<section class="relative py-16 bg-cover bg-center" style="background-image: url('../images/facility.jpg');">
+  <div class="absolute inset-0 bg-black opacity-60"></div>
+  <div class="container mx-auto px-12 text-center relative z-10 animate-fade-in">
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <span class="text-accent/90 font-semibold tracking-wider uppercase text-sm">Why Choose Us</span>
+      <h2 class="text-5xl font-bold mt-2 mb-6 text-white leading-tight">Experience Excellence with <span class="text-accent/90">Tech PI Solutions</span></h2>
+      <div class="w-24 h-1 bg-accent/90 mx-auto rounded-full"></div>
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform">
-        <div class="text-4xl mb-4 text-secondary">🏆</div>
-        <h3 class="text-xl font-bold mb-4">Quality Excellence</h3>
-        <p class="text-gray-600">CPRI approved and ISO certified manufacturing processes ensuring superior quality products with advanced safety features.</p>
+      <div class="group">
+        <div class="bg-white/95 rounded-xl p-8 shadow-xl transform transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl">
+          <div class="relative w-16 h-16 mb-8 mx-auto">
+            <div class="absolute inset-0 bg-accent/90 rounded-lg rotate-6 group-hover:rotate-12 transition-transform"></div>
+            <div class="absolute inset-0 bg-primary rounded-lg flex items-center justify-center text-3xl text-white">
+              🏆
+            </div>
+          </div>
+          <h3 class="text-2xl font-bold mb-4 text-primary group-hover:text-secondary transition-colors">Quality Excellence</h3>
+          <p class="text-gray-600 leading-relaxed">CPRI approved and ISO certified manufacturing processes ensuring superior quality products with advanced safety features.</p>
+          <div class="mt-6 h-1 w-12 bg-accent/90 group-hover:w-full transition-all duration-300 mx-auto"></div>
+        </div>
       </div>
-      <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform">
-        <div class="text-4xl mb-4 text-secondary">👥</div>
-        <h3 class="text-xl font-bold mb-4">Expert Leadership</h3>
-        <p class="text-gray-600">Two decades of electrical industry expertise, handling complex projects with practical experience in developing unique market solutions.</p>
+
+      <div class="group">
+        <div class="bg-white/95 rounded-xl p-8 shadow-xl transform transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl">
+          <div class="relative w-16 h-16 mb-8 mx-auto">
+            <div class="absolute inset-0 bg-accent/90 rounded-lg rotate-6 group-hover:rotate-12 transition-transform"></div>
+            <div class="absolute inset-0 bg-primary rounded-lg flex items-center justify-center text-3xl text-white">
+              👥
+            </div>
+          </div>
+          <h3 class="text-2xl font-bold mb-4 text-primary group-hover:text-secondary transition-colors">Expert Leadership</h3>
+          <p class="text-gray-600 leading-relaxed">Two decades of electrical industry expertise, handling complex projects with practical experience in developing unique market solutions.</p>
+          <div class="mt-6 h-1 w-12 bg-accent/90 group-hover:w-full transition-all duration-300 mx-auto"></div>
+        </div>
       </div>
-      <div class="bg-white p-8 rounded-lg shadow-md transform hover:scale-105 transition-transform">
-        <div class="text-4xl mb-4 text-secondary">🛠️</div>
-        <h3 class="text-xl font-bold mb-4">Comprehensive Service</h3>
-        <p class="text-gray-600">Round-the-clock technical support, installation services, personnel training, and dedicated after-sales support.</p>
+
+      <div class="group">
+        <div class="bg-white/95 rounded-xl p-8 shadow-xl transform transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl">
+          <div class="relative w-16 h-16 mb-8 mx-auto">
+            <div class="absolute inset-0 bg-accent/90 rounded-lg rotate-6 group-hover:rotate-12 transition-transform"></div>
+            <div class="absolute inset-0 bg-primary rounded-lg flex items-center justify-center text-3xl text-white">
+              🛠️
+            </div>
+          </div>
+          <h3 class="text-2xl font-bold mb-4 text-primary group-hover:text-secondary transition-colors">Comprehensive Service</h3>
+          <p class="text-gray-600 leading-relaxed">Round-the-clock technical support, installation services, personnel training, and dedicated after-sales support.</p>
+          <div class="mt-6 h-1 w-12 bg-accent/90 group-hover:w-full transition-all duration-300 mx-auto"></div>
+        </div>
       </div>
     </div>
+    <CustomerSection class="mt-12 animate-scroll" />
+    <StatsSection />
   </div>
 </section>
 
-<CustomerSection />
-<StatsSection />
 <ProductsPreview />
 <ServicesPreview />
 
@@ -70,3 +102,24 @@ description="CPRI approved, ISO certified manufacturer of LT Panels and Cable Tr
   </div>
 </section>
 </Layout>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 2s ease-in-out;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+
+  .animate-scroll {
+    display: flex;
+    animation: scroll 20s linear infinite;
+  }
+</style>
