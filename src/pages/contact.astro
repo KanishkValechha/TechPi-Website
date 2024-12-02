@@ -1,11 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
 
 const contactInfo = {
-  address: "123 Manufacturing Street, Industrial District, City, Country",
-  email: "info@techmanufacturing.com",
-  phone: "+1 (555) 123-4567",
-  workingHours: "Monday - Friday: 9:00 AM - 6:00 PM"
+  address: "Plot No-977,IDA, Phase V, Rami Reddy Nagar, Jeedimetla, Hyderabad, Telangana,500055 📍",
+  email: "project.techpi@gmail.com",
+  phone: "+91 8197496989 | 7032901979",
+  workingHours: "Monday - Saturday: 9:00 AM - 6:00 PM"
 };
 
 const schema = {
@@ -23,7 +24,7 @@ const schema = {
     },
     "email": contactInfo.email,
     "telephone": contactInfo.phone,
-    "openingHours": "Mo-Fr 09:00-18:00"
+    "openingHours": "Mo-Sa 09:00-18:00"
   }
 };
 ---
@@ -34,12 +35,11 @@ const schema = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
-  <div class="bg-primary text-white py-12">
-    <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-bold mb-4">Contact Us</h1>
-      <p class="text-xl">We're here to help with your project needs</p>
-    </div>
-  </div>
+  <PageHeader
+    title="Contact Us"
+    description="Professional solutions for your electrical infrastructure needs"
+    image="/images/facility.jpg"
+  />
 
   <section class="py-16">
     <div class="container mx-auto px-4">
@@ -111,7 +111,9 @@ const schema = {
             <div class="space-y-6">
               <div>
                 <h3 class="font-semibold text-lg mb-2">Address</h3>
-                <p class="text-gray-600">{contactInfo.address}</p>
+                <a href={`https://maps.app.goo.gl/UffqnsTC94uSqSv97`} class="text-primary hover:text-secondary">
+                  {contactInfo.address}
+                </a>
               </div>
               
               <div>
@@ -135,7 +137,7 @@ const schema = {
             </div>
           </div>
           
-          <div class="mt-8 bg-gray-50 p-8 rounded-lg">
+          <!-- <div class="mt-8 bg-gray-50 p-8 rounded-lg">
             <h3 class="font-semibold text-lg mb-4">Follow Us</h3>
             <div class="flex space-x-4">
               <a href="#" class="text-gray-600 hover:text-primary">
@@ -151,7 +153,7 @@ const schema = {
                 </svg>
               </a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

@@ -1,25 +1,29 @@
 ---
 const stats = [
   {
-    number: "2+",
+    number: "2",
+    suffix: "+",
     label: "Years Experience",
     description: "Delivering excellence in manufacturing",
     icon: "🏢"
   },
   {
-    number: "50+",
+    number: "50",
+    suffix: "+",
     label: "Projects Completed",
     description: "Across various industries",
     icon: "📊"
   },
   {
-    number: "100%",
+    number: "100",
+    suffix: "%",
     label: "Customer Satisfaction",
     description: "Global presence and reach",
     icon: "👥"
   },
   {
-    number: "100%",
+    number: "100",
+    suffix: "%",
     label: "Quality Assured",
     description: "ISO 9001:2015 certified",
     icon: "✓"
@@ -51,9 +55,10 @@ const stats = [
             </div>
             <div 
               class="text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-accent"
-              data-stat={stat.number.replace('+', '')}
+              data-stat={stat.number}
+              data-suffix={stat.suffix}
             >
-              {stat.number}
+              {stat.number + stat.suffix}
             </div>
             <div class="text-xl font-semibold mb-1 text-accent">{stat.label}</div>
             <p class="text-gray-300">{stat.description}</p>
@@ -67,11 +72,12 @@ const stats = [
 <script>
   function animateValue(element, start, end, duration) {
     let startTimestamp = null;
+    const suffix = element.getAttribute('data-suffix'); 
     const step = (timestamp) => {
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min((timestamp - startTimestamp) / duration, 1);
       const current = Math.floor(progress * (end - start) + start);
-      element.textContent = current + '+';
+      element.textContent = `${current}${suffix}`;
       if (progress < 1) {
         window.requestAnimationFrame(step);
       }
@@ -97,10 +103,6 @@ const stats = [
       observer.observe(element);
     });
   }
-
-  // Initialize on page load
   setupStatAnimations();
-
-  // Reinitialize after Astro page transitions
   document.addEventListener('astro:page-load', setupStatAnimations);
 </script>

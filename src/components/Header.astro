@@ -8,8 +8,8 @@ const navItems = [
     href: '/products', 
     text: 'Products',
     dropdown: [
-      { href: '/products#panels', text: 'Low Voltage Panels' },
-      { href: '/products#trays', text: 'Cable Trays' },
+      { href: '/products#low-voltage-panel', text: 'Low Voltage Panels' },
+      { href: '/products#cable-tray', text: 'Cable Trays' },
     ]
   },
   { 
@@ -32,6 +32,10 @@ const navItems = [
   { 
     href: '/contact', 
     text: 'Contact' 
+  },
+  {
+    href: '/faq',
+    text: 'FAQ'
   },
 ];
 ---
@@ -183,14 +187,6 @@ const navItems = [
 
   body.menu-open {
     overflow: hidden;
-  }
-  @font-face {
-  font-family: 'Accelerator',sans-serif;
-  src: url('../assets/fonts/Accelerator.woff2') format('woff2'),
-    url('../assets/fonts/Accelerator.woff') format('woff'),
-    url('../assets/fonts/Accelerator.otf') format('opentype'),
-    url('../assets/fonts/Accelerator.ttf') format('truetype');
-    font-weight: light;
   }
   @font-face {
     font-family: 'Paladins';

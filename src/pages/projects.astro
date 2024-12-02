@@ -3,132 +3,163 @@ import Layout from '../layouts/Layout.astro';
 import PageHeader from '../components/PageHeader.astro';
 
 const projects = [
-  {
-    title: "Industrial Complex Power Distribution",
-    client: "TechCorp Industries",
-    location: "Dubai, UAE",
-    description: "Complete electrical infrastructure solution including cable trays and LV panels for a 500,000 sq ft industrial complex.",
-    image: "/images/project1.jpg",
-    year: "2023",
-    category: "Industrial"
-  },
-  {
-    title: "Smart City Infrastructure",
-    client: "Metropolitan Development Authority",
-    location: "Singapore",
-    description: "Smart power distribution system with integrated monitoring for a new urban development project.",
-    image: "/images/project2.jpg",
-    year: "2023",
-    category: "Urban Infrastructure"
-  },
-  {
-    title: "Data Center Power Management",
-    client: "Global Data Solutions",
-    location: "Frankfurt, Germany",
-    description: "High-capacity cable management system and redundant power distribution for a tier-4 data center.",
-    image: "/images/project3.jpg",
-    year: "2022",
-    category: "Data Centers"
-  },
-  {
-    title: "Manufacturing Plant Upgrade",
-    client: "AutoTech Manufacturing",
-    location: "Detroit, USA",
-    description: "Modernization of existing power distribution system with smart monitoring capabilities.",
-    image: "/images/project4.jpg",
-    year: "2022",
-    category: "Industrial"
-  }
+  { company: "Meenakshi Techpark", location: "Hyderabad" },
+  { company: "Spandana Sphoorty", location: "Hyderabad" },
+  { company: "Dupont DSCI", location: "Hyderabad" },
+  { company: "Paradise", location: "Hyderabad" },
+  { company: "Vasu Hospital", location: "Bidar" },
+  { company: "Pragya Mall Food Court", location: "Hyderabad" },
+  { company: "Speed Infra", location: "Hyderabad" },
+  { company: "ISB", location: "Hyderabad" },
+  { company: "Gloplax", location: "Hyderabad" },
+  { company: "Verizon", location: "Hyderabad" },
+  { company: "HCL", location: "Hyderabad" },
+  { company: "Q Spider", location: "Hyderabad" },
+  { company: "Trinity Food Court", location: "Hyderabad" },
+  { company: "JSW", location: "Pune" },
+  { company: "BA Continum India", location: "Hyderabad" },
+  { company: "Indhan Fevorich", location: "Hubballi" },
+  { company: "Bank of America", location: "Hyderabad" },
+  { company: "BTG", location: "Hyderabad" },
+  { company: "NCR", location: "Hyderabad" },
+  { company: "ISB B & D Block", location: "Hyderabad" },
+  { company: "Verizon 7th Floor", location: "Hyderabad" },
+  { company: "Schrodinger", location: "Hyderabad" },
+  { company: "CDK", location: "Hyderabad" },
+  { company: "Qualcomm", location: "Bangalore" },
+  { company: "Fisker", location: "Hyderabad" },
+  { company: "Meghana Conventional Hall", location: "Hyderabad" },
+  { company: "Kshema", location: "Hyderabad" },
+  { company: "Verizon 6th Floor", location: "Hyderabad" },
+  { company: "Verisk", location: "Hyderabad" },
+  { company: "CGI", location: "Bangalore" },
+  { company: "Hyundai Motors", location: "Hyderabad" },
+  { company: "Mouritech", location: "Pune" },
+  { company: "Simply South", location: "Hyderabad" },
+  { company: "Ovation Services", location: "Hyderabad" },
+  { company: "MYK Laticrete", location: "Hyderabad" },
+  { company: "Sutherland 8th Floor", location: "Hyderabad" },
+  { company: "International Premium Lounge", location: "Hyderabad" },
+  { company: "MSN Urban Venture", location: "Hyderabad" },
+  { company: "Meenakshi C Wing", location: "Hyderabad" },
+  { company: "Ameriprise", location: "Hyderabad" },
+  { company: "Intouch", location: "Hyderabad" },
+  { company: "Wells Fargo", location: "Hyderabad" },
+  { company: "League Mall", location: "Hyderabad" },
+  { company: "Sutherland 9th Floor", location: "Hyderabad" },
+  { company: "Mouritech", location: "Hyderabad" },
+  { company: "Goldman Sachs", location: "Hyderabad" },
+  { company: "AMD", location: "Hyderabad" }
 ];
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "Our Projects",
-  "description": "Showcase of our successful electrical infrastructure projects worldwide",
-  "mainEntity": {
-    "@type": "ItemList",
-    "itemListElement": projects.map((project, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "item": {
-        "@type": "Project",
-        "name": project.title,
-        "description": project.description,
-        "location": project.location
-      }
-    }))
+// Remove duplicate entries
+const uniqueProjects = Array.from(new Set(projects.map(project => JSON.stringify(project)))).map(str => JSON.parse(str));
+
+// Group projects by location for additional context
+const projectsByLocation = uniqueProjects.reduce((acc, project) => {
+  if (!acc[project.location]) {
+    acc[project.location] = [];
   }
-};
+  acc[project.location].push(project.company);
+  return acc;
+}, {});
+
+// Sort locations by number of projects (descending)
+const sortedLocations = Object.keys(projectsByLocation).sort(
+  (a, b) => projectsByLocation[b].length - projectsByLocation[a].length
+);
 ---
 
 <Layout
-  title="Projects | Tech Manufacturing"
-  description="Explore our portfolio of successful electrical infrastructure projects, showcasing our expertise in Cable Trays and Low Voltage Panels."
+  title="Our Projects"
+  description="A comprehensive showcase of our diverse project partnerships"
 >
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-
   <PageHeader
-    title="Our Services"
-    description="Professional solutions for your electrical infrastructure needs"
-    image="/images/facility.jpg"
+    title="Our Projects"
+    description="Our extensive network of project partnerships"
+    image="/images/global.jpg"
   />
 
-  <section class="py-16">
+  <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-        {projects.map((project, index) => (
-          <div 
-            class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300"
-            data-aos="fade-up"
-            data-aos-delay={index * 100}
-          >
-            <div class="aspect-video bg-gray-100 relative">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-              <div class="absolute bottom-4 left-4 text-white">
-                <span class="px-3 py-1 bg-secondary rounded-full text-sm">
-                  {project.category}
-                </span>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-2">{project.title}</h3>
-              <div class="flex items-center gap-4 text-gray-600 mb-4 text-sm">
-                <span>{project.location}</span>
-                <span>•</span>
-                <span>{project.year}</span>
-              </div>
-              <p class="text-gray-600 mb-4 text-sm line-clamp-3">{project.description}</p>
-              <div class="flex justify-between items-center">
-                <span class="text-primary font-semibold text-sm">{project.client}</span>
-                <button class="text-secondary hover:text-primary transition-colors text-sm">
-                  View Details →
-                </button>
-              </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto">
+        {/* Hyderabad Column */}
+        <div 
+          class="bg-white rounded-xl shadow-lg overflow-hidden"
+          data-aos="fade-up"
+        >
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-4 text-gray-800 border-b pb-2 flex justify-between items-center">
+              Hyderabad
+              <span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                {projectsByLocation["Hyderabad"].length} Projects
+              </span>
+            </h3>
+            <div class="max-h-96 overflow-y-auto space-y-2">
+              {projectsByLocation["Hyderabad"].map((company) => (
+                <div class="flex items-center text-gray-600 text-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                  {company}
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+        </div>
+
+        {/* Other Locations - Nested Grid */}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {sortedLocations
+            .filter(location => location !== "Hyderabad")
+            .map((location, index) => {
+              const companies = projectsByLocation[location];
+              return (
+                <div 
+                  class="bg-white rounded-xl shadow-lg overflow-hidden"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                >
+                  <div class="p-6">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800 border-b pb-2 flex justify-between items-center">
+                      {location}
+                      <span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                        {companies.length} Projects
+                      </span>
+                    </h3>
+                    <div class="space-y-2">
+                      {companies.map((company) => (
+                        <div class="flex items-center text-gray-600 text-sm">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                          </svg>
+                          {company}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+        </div>
       </div>
     </div>
   </section>
 
-  <section 
-    class="bg-gray-50 py-16"
-    data-aos="fade-up"
-  >
+  <section class="bg-white py-16">
     <div class="container mx-auto px-4 text-center">
       <h2 
         class="text-3xl font-bold mb-6"
         data-aos="fade-up"
       >
-        Ready to Start Your Project?
+        Expand Your Network
       </h2>
       <p 
         class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto"
         data-aos="fade-up"
         data-aos-delay="200"
       >
-        Let's discuss how we can help you achieve your infrastructure goals with our expertise and solutions.
+        Discover how our extensive project partnerships can drive your next venture.
       </p>
       <a 
         href="/contact" 
@@ -136,24 +167,28 @@ const schema = {
         data-aos="fade-up"
         data-aos-delay="400"
       >
-        Contact Us
+        Connect With Us
       </a>
     </div>
   </section>
 </Layout>
 
 <style>
-  /* Smooth scrolling for the entire page */
   html {
     scroll-behavior: smooth;
   }
-
-  /* Hover effect for project cards */
-  .project-card {
-    transition: transform 0.3s ease-in-out;
+  /* Custom scrollbar for long lists */
+  .max-h-96::-webkit-scrollbar {
+    width: 6px;
   }
-
-  .project-card:hover {
-    transform: translateY(-5px);
+  .max-h-96::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  .max-h-96::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+  }
+  .max-h-96::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 </style>

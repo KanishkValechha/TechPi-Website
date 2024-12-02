@@ -21,29 +21,21 @@ const { title, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title} | Tech Manufacturing</title>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style is:global>
-      /* Base font for the entire site */
       body {
         font-family: 'Plus Jakarta Sans', sans-serif;
       }
-
-      /* Custom heading styles */
       h1, h2, h3, h4, h5, h6 {
         font-family: 'Syne', sans-serif;
         letter-spacing: -0.02em;
       }
-
-      /* Company name specific font */
       .company-name {
         font-family: 'Orbitron', sans-serif;
         letter-spacing: 0.05em;
       }
-
-      /* Page transition animations */
       ::view-transition-old(root),
       ::view-transition-new(root) {
         animation-duration: 0.5s;
@@ -54,7 +46,7 @@ const { title, description } = Astro.props;
       }
 
       ::view-transition-new(root) {
-        animation: slideIn 1.5s ease-out forwards; /* Increased duration to 1.5s */
+        animation: slideIn 1.5s ease-out forwards;
       }
 
       @keyframes slideIn {
@@ -107,8 +99,6 @@ const { title, description } = Astro.props;
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
       }
-
-      /* Enhanced typography styles */
       .heading-xl {
         font-size: 3.5rem;
         line-height: 1.1;
@@ -136,6 +126,26 @@ const { title, description } = Astro.props;
         font-size: 1rem;
         line-height: 1.6;
       }
+     ::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF6B35;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #FF6B35 transparent;
+}
     </style>
   </head>
   <body class="min-h-screen flex flex-col">
@@ -149,8 +159,6 @@ const { title, description } = Astro.props;
     <Footer />
     <script>
       import AOS from 'aos';
-      
-      // Initialize AOS with more aggressive settings
       AOS.init({
         duration: 800,
         once: false,
