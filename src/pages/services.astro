@@ -7,34 +7,58 @@ const services = [
     title: "Testing Services",
     description: "Comprehensive testing and certification services for electrical equipment and systems.",
     features: [
-      "Load testing for cable trays",
-      "Electrical safety testing",
-      "Performance verification",
-      "Quality assurance testing"
+      "Factory Acceptance Testing (FAT)",
+      "Physical Verification",
+      "BOM Verification",
+      "Torque Testing",
+      "Insulation Resistance Testing",
+      "High Voltage Testing"
     ],
-    icon: "⚡"
+    icon: "🔬",
+    details: [
+      "Physical Verification according to the drawing",
+      "Verification of all BOM in-line with drawing",
+      "Torque testing as per standard",
+      "Insulation Resistance of Busbar",
+      "High Voltage test for Busbars",
+      "Primary and Secondary Injection Testing",
+      "Functional Testing with Breaker Interlocking",
+      "Meters/PLC Programming"
+    ]
   },
   {
-    title: "Custom Solutions",
+    title: "Custom Manufacturing Solutions",
     description: "Tailored manufacturing solutions to meet your specific project requirements.",
     features: [
+      "Custom Electrical Infrastructure",
+      "Precision Engineering",
+      "Specialized Equipment Design",
+      "Quality Assurance"
+    ],
+    icon: "⚙️",
+    details: [
       "Custom dimensions and specifications",
       "Special material requirements",
       "Project-specific modifications",
-      "Design consultation"
-    ],
-    icon: "🔧"
+      "Comprehensive design consultation"
+    ]
   },
   {
-    title: "Technical Support",
+    title: "Technical Support & Commissioning",
     description: "Expert guidance and support throughout your project lifecycle.",
     features: [
+      "On-site Support",
+      "System Integration",
+      "Performance Optimization",
+      "Ongoing Maintenance"
+    ],
+    icon: "💡",
+    details: [
       "Installation support",
       "Maintenance guidance",
       "Troubleshooting assistance",
-      "Technical documentation"
-    ],
-    icon: "💡"
+      "Detailed technical documentation"
+    ]
   }
 ];
 
@@ -43,13 +67,13 @@ const schema = {
   "@type": "Service",
   "provider": {
     "@type": "Organization",
-    "name": "Tech Manufacturing"
+    "name": "Tech PI Solutions"
   },
   "serviceType": "Electrical Equipment Testing and Manufacturing",
   "areaServed": "Global",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "itemListElement": services.map((service, index) => ({
+    "itemListElement": services.map((service) => ({
       "@type": "Offer",
       "itemOffered": {
         "@type": "Service",
@@ -62,41 +86,58 @@ const schema = {
 ---
 
 <Layout
-  title="Services"
-  description="Professional testing services, custom solutions, and expert technical support for electrical infrastructure projects."
+  title="Tech PI Solutions - Services"
+  description="Comprehensive testing, manufacturing, and technical support for electrical infrastructure projects."
 >
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
   <PageHeader
-    title="Our Services"
-    description="Professional solutions for your electrical infrastructure needs"
+    title="Our Comprehensive Services"
+    description="Precision Testing, Custom Manufacturing, and Expert Support"
     image="/images/services.jpg"
   />
 
-  <section class="py-16">
+  <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {services.map((service) => (
-          <div class="bg-white rounded-lg shadow-md p-8">
-            <div class="flex flex-col md:flex-row place-items-center md:items-start gap-6">
-              <div class="text-4xl bg-gray-100 p-4 rounded-lg">{service.icon}</div>
-              <div class="flex-1">
-                <h2 class="text-3xl font-bold mb-4">{service.title}</h2>
-                <p class="text-gray-600 text-lg mb-6">{service.description}</p>
-                <div class="bg-gray-50 p-6 rounded-lg">
-                  <h3 class="font-semibold mb-4">What we offer:</h3>
-                  <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {service.features.map(feature => (
-                      <li class="flex items-center gap-2">
-                        <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-2xl">
+            <div class="p-6">
+              <div class="flex items-center mb-4">
+                <div class="text-4xl mr-4 opacity-70">{service.icon}</div>
+                <h2 class="text-2xl font-bold text-gray-800">{service.title}</h2>
               </div>
+              <p class="text-gray-600 mb-6">{service.description}</p>
+              
+              <div class="bg-blue-50 rounded-lg p-5">
+                <h3 class="font-semibold text-lg mb-4 text-blue-800">Key Features:</h3>
+                <ul class="space-y-2">
+                  {service.features.map((feature) => (
+                    <li class="flex items-center">
+                      <svg class="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span class="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <details class="mt-6 bg-gray-100 rounded-lg">
+                <summary class="p-4 cursor-pointer text-gray-700 font-semibold hover:bg-gray-200 rounded-lg">
+                  Detailed Service Breakdown
+                </summary>
+                <ul class="p-4 space-y-2 text-sm text-gray-600">
+                  {service.details.map((detail) => (
+                    <li class="flex items-center">
+                      <svg class="w-4 h-4 text-gray-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
+                      </svg>
+                      {detail}
+                    </li>
+                  ))}
+                </ul>
+              </details>
             </div>
           </div>
         ))}
@@ -104,11 +145,19 @@ const schema = {
     </div>
   </section>
 
-  <section class="bg-gray-50 py-16">
+  <section class=" text-black py-16">
     <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-8">Ready to Get Started?</h2>
-      <p class="text-xl text-gray-600 mb-8">Contact us to discuss your project requirements and how we can help.</p>
-      <a href="/contact" class="inline-block bg-secondary text-white px-8 py-3 rounded-lg hover:bg-opacity-90">Contact Us</a>
+      <h2 class="text-4xl font-bold mb-6">Let's Collaborate on Your Next Project</h2>
+      <p class="text-xl mb-8 max-w-3xl mx-auto">
+        Our expert team is ready to provide comprehensive testing, custom manufacturing, 
+        and technical support tailored to your unique electrical infrastructure needs.
+      </p>
+      <a 
+        href="/contact" 
+        class="inline-block bg-secondary text-white  px-10 py-4 rounded-full font-semibold hover:opacity-90 transition-colors"
+      >
+        Get Started Now
+      </a>
     </div>
   </section>
 </Layout>
