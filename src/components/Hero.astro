@@ -44,19 +44,35 @@
 
 <style>
     .moving-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         background-image: url('../images/collage.jpg');
         background-size: cover;
         background-position: center;
-        background-repeat: repeat-x;
-        animation: move-background 20s linear infinite;
+        animation: slide 20s linear infinite;
     }
 
-    @keyframes move-background {
+    .moving-background::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 100%;
+        right: -100%;
+        bottom: 0;
+        background-image: url('../images/collage.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    @keyframes slide {
         0% {
-            background-position: 0 0;
+            transform: translate3d(0, 0, 0);
         }
         100% {
-            background-position: -2000px 0;
+            transform: translate3d(-100%, 0, 0);
         }
     }
 
