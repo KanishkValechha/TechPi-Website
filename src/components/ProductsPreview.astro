@@ -60,7 +60,7 @@ const products: Product[] = [
       // Start a new timer
       this.timer = setTimeout(() => {
         this.nextProduct();
-      }, 5000);
+      }, 3000); // Changed from 5000 to 3000
       
       // Animate progress bar
       this.animateProgressBar();
@@ -68,7 +68,7 @@ const products: Product[] = [
     
     animateProgressBar() {
       let start = null;
-      const duration = 5000;
+      const duration = 3000; // Changed from 5000 to 3000
       
       const step = (timestamp) => {
         if (!start) start = timestamp;
@@ -118,38 +118,42 @@ const products: Product[] = [
   {products.map((product, index) => (
     <div 
       x-show={`currentProduct === ${index}`}
-      class="absolute inset-0 transition-all duration-1000 ease-out"
-      x-transition:enter="transition ease-out duration-1000"
-      x-transition:enter-start="opacity-0 transform scale-105"
-      x-transition:enter-end="opacity-100 transform scale-100"
-      x-transition:leave="transition ease-in duration-1000"
-      x-transition:leave-start="opacity-100 transform scale-100"
-      x-transition:leave-end="opacity-0 transform scale-95"
+      class="absolute inset-0 transition-transform duration-[1000ms] ease-in-out"
+      x-transition:enter="transition-transform ease-in-out duration-[1000ms]"
+      x-transition:enter-start="transform translate-x-full"
+      x-transition:enter-end="transform translate-x-0"
+      x-transition:leave="transition-transform ease-in-out duration-[1000ms]"
+      x-transition:leave-start="transform translate-x-0"
+      x-transition:leave-end="transform -translate-x-full"
     >
       {/* Background Image */}
       <img 
         src={product.images[0]} 
         alt={product.name}
-        class="absolute inset-0 w-full h-full object-cover transform transition-transform duration-[2000ms] ease-out"
-        x-bind:class="currentProduct === ${index} ? 'scale-100' : 'scale-110'"
+        class="absolute inset-0 w-full h-full object-cover"
       />
-      <div class="absolute inset-0 bg-black opacity-40 transition-opacity duration-1000"></div>
+      <div class="absolute inset-0 bg-black/50"></div>
 
       {/* Product Content Overlay */}
-      <div class="relative z-20 flex items-center justify-center h-full">
+      <div class="relative z-20 flex items-center justify-center h-full"
+           x-transition:enter="transition-transform ease-out duration-[1500ms] delay-300"
+           x-transition:enter-start="transform translate-y-12"
+           x-transition:enter-end="transform translate-y-0">
         <div class="text-center max-w-3xl mx-auto px-8">
-          <span class="text-accent/90 font-semibold tracking-wider uppercase text-sm">Our Products</span>
-          <h2 class="text-5xl font-bold mt-2 mb-6 text-white leading-tight">{product.name}</h2>
-          <div class="w-24 h-1 bg-accent/90 mx-auto rounded-full mb-6"></div>
-          <p class="text-xl text-white/90 leading-relaxed">{product.description}</p>
-          <a 
-            href={`/products#${product.name.toLowerCase().replace(/ /g, '-')}`}
-            class="mt-8 inline-block"
-          >
-            <span class="inline-block bg-white/20 hover:bg-accent/90 text-white px-6 py-3 rounded-full transition-all duration-300 border-2 border-white/30 hover:border-accent/90">
-              Learn More
-            </span>
-          </a>
+          <div class="bg-black/60 p-8 rounded-lg backdrop-blur-sm">
+            <span class="text-accent/90 font-semibold tracking-wider uppercase text-sm">Our Products</span>
+            <h2 class="text-5xl font-bold mt-2 mb-6 text-white leading-tight">{product.name}</h2>
+            <div class="w-24 h-1 bg-accent/90 mx-auto rounded-full mb-6"></div>
+            <p class="text-xl text-white/90 leading-relaxed">{product.description}</p>
+            <a 
+              href={`/products#${product.name.toLowerCase().replace(/ /g, '-')}`}
+              class="mt-8 inline-block"
+            >
+              <span class="inline-block bg-white/20 hover:bg-accent/90 text-white px-6 py-3 rounded-full transition-all duration-300 border-2 border-white/30 hover:border-accent/90">
+                Learn More
+              </span>
+            </a>
+          </div>
         </div>
       </div>
 
