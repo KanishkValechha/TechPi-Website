@@ -51,23 +51,13 @@ const schema = {
           </p>
           
           <form class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
               <div>
                 <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                  required
-                />
-              </div>
-              <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                   required
                 />
@@ -97,12 +87,25 @@ const schema = {
             </div>
             
             <button
-              type="submit"
+              id="submitButton"
+              type="button"
               class="w-full bg-primary text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors"
             >
               Send Message
             </button>
           </form>
+
+          <script>
+            document.getElementById('submitButton').addEventListener('click', () => {
+              const name = (document.getElementById('name') as HTMLInputElement).value;
+              const subject = (document.getElementById('subject') as HTMLInputElement).value;
+              const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+              
+              const body = `Name: ${name}\n\nMessage:\n${message}`;
+              const mailtoUrl = `mailto:kanishkvalecha09@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+              window.location.href = mailtoUrl;
+            });
+          </script>
         </div>
         
         <div>

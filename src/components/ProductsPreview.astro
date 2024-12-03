@@ -60,7 +60,7 @@ const products: Product[] = [
       // Start a new timer
       this.timer = setTimeout(() => {
         this.nextProduct();
-      }, 3000); // Changed from 5000 to 3000
+      }, 5000); // Changed from 3000 to 5000
       
       // Animate progress bar
       this.animateProgressBar();
@@ -68,7 +68,7 @@ const products: Product[] = [
     
     animateProgressBar() {
       let start = null;
-      const duration = 3000; // Changed from 5000 to 3000
+      const duration = 5000; // Changed from 3000 to 5000
       
       const step = (timestamp) => {
         if (!start) start = timestamp;
