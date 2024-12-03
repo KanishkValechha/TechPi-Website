@@ -40,8 +40,8 @@ const navItems = [
 ];
 ---
 
-<header class="bg-primary text-white fixed w-full top-0 left-0 z-[100]">
-  <nav class="container mx-auto px-4 py-2">
+<header class="bg-primary/80 backdrop-blur-md text-white fixed w-full top-0 left-0 z-[100]">
+  <nav class="container mx-auto lg:mx-4 px-4 py-2">
     <div class="relative">
       <div class="flex justify-between items-center">
         <a href="/" class="flex items-center gap-4 group">
@@ -65,7 +65,7 @@ const navItems = [
         <!-- Hamburger Menu Button -->
         <button
           id="menuButton"
-          class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5"
+          class="lg:hidden flex flex-col justify-center items-end w-8 h-8 space-y-1.5 "
           aria-label="Toggle menu"
           aria-expanded="false"
         >
@@ -75,7 +75,7 @@ const navItems = [
         </button>
 
         <!-- Desktop Navigation -->
-        <ul class="hidden md:flex space-x-8">
+        <ul class="hidden lg:flex space-x-8">
           {navItems.map(item => (
             <li class="relative group">
               <a 
@@ -118,7 +118,7 @@ const navItems = [
       <!-- Redesigned Mobile Navigation -->
       <div
         id="mobileMenu"
-        class="fixed inset-0 bg-black bg-opacity-50 md:hidden hidden z-[150]"
+        class="fixed inset-0 bg-black bg-opacity-50 lg:hidden hidden z-[150]"
         style="backdrop-filter: blur(4px);"
       >
         <div class="fixed inset-y-0 right-0 max-w-xs w-full bg-primary shadow-lg transform transition-transform duration-300 ease-in-out translate-x-full z-[160]"
@@ -171,9 +171,6 @@ const navItems = [
     </div>
   </nav>
 </header>
-
-<!-- Spacer to prevent content from hiding under fixed header -->
-<div class=" h-20"></div>
 
 <style>
   
