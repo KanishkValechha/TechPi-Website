@@ -73,7 +73,7 @@ const customers = [
     <p class="text-xl text-white text-center mb-12">Delivering excellence to companies worldwide</p>
     
     <div class="overflow-hidden">
-      <div class="flex gap-8 animate-scroll">
+      <div class="flex gap-8 animate-scroll whitespace-nowrap">
         {customers.map((customer) => (
           <div class="flex-none w-64 bg-white bg-opacity-90 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
             <div class="flex items-center justify-center mb-4">
@@ -103,11 +103,17 @@ const customers = [
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-50%);
+      transform: translateX(calc(-50% - 2rem)); /* accounts for the gap between sets */
     }
   }
 
   .animate-scroll {
-    animation: scroll 30s linear infinite;
+    animation: scroll 15s linear infinite;
+    will-change: transform;
+  }
+
+  /* Pause animation on hover */
+  .animate-scroll:hover {
+    animation-play-state: paused;
   }
 </style>
