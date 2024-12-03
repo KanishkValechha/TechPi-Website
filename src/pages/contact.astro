@@ -104,6 +104,7 @@ const schema = {
 
           <script>
             document.getElementById('submitButton').addEventListener('click', () => {
+              const form = document.querySelector('form');
               const name = (document.getElementById('name') as HTMLInputElement).value;
               const company = (document.getElementById('company') as HTMLInputElement).value;
               const subject = (document.getElementById('subject') as HTMLInputElement).value;
@@ -112,6 +113,9 @@ const schema = {
               const body = `Myself ${name} from ${company},\n\n${message}`;
               const mailtoUrl = `mailto:project.techpi@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
               window.location.href = mailtoUrl;
+              
+              // Reset the form
+              form?.reset();
             });
           </script>
         </div>
