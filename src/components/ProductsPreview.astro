@@ -132,7 +132,7 @@ const products: Product[] = [
         alt={product.name}
         class="absolute inset-0 w-full h-full object-cover"
       />
-      <div class="absolute inset-0 bg-black/50"></div>
+      {/* <div class="absolute inset-0 bg-black/50"></div> */}
 
       {/* Product Content Overlay */}
       <div class="relative z-20 flex items-center justify-center h-full"
@@ -140,7 +140,7 @@ const products: Product[] = [
            x-transition:enter-start="transform translate-y-12"
            x-transition:enter-end="transform translate-y-0">
         <div class="text-center max-w-3xl mx-auto px-8">
-          <div class="bg-black/60 p-8 rounded-lg backdrop-blur-sm">
+          <div class="bg-black/60 p-8 rounded-lg backdrop-blur-md">
             <span class="text-accent/90 font-semibold tracking-wider uppercase text-sm">Our Products</span>
             <h2 class="text-5xl font-bold mt-2 mb-6 text-white leading-tight">{product.name}</h2>
             <div class="w-24 h-1 bg-accent/90 mx-auto rounded-full mb-6"></div>
@@ -173,7 +173,7 @@ const products: Product[] = [
   {/* Navigation Buttons */}
   <button 
     @click="prevProduct()"
-    class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/30 p-2 rounded-full z-40 hover:bg-white/50"
+    class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/30 p-2 rounded-full z-40 hover:bg-white/50 backdrop-blur-md"
   >
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="m15 18-6-6 6-6"/>
@@ -182,7 +182,7 @@ const products: Product[] = [
 
   <button 
     @click="nextProduct()"
-    class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/30 p-2 rounded-full z-40 hover:bg-white/50"
+    class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/30 p-2 rounded-full z-40 hover:bg-white/50 backdrop-blur-md"
   >
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="m9 18 6-6-6-6"/>
