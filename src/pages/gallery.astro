@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import GalleryComponent from '../components/Gallery.astro';
+import CategoryFilter from '../components/CategoryFilter.astro';
+
+const images = [
+  {
+    src: '/images/Low-voltage.jpg',
+    alt: 'Low Voltage Panel System',
+    category: 'LV Panels',
+    description: 'State-of-the-art low voltage panel systems engineered for optimal performance and safety.'
+  },
+  {
+    src: '/images/cable-trays.jpg',
+    alt: 'Cable Tray Installation',
+    category: 'Cable Trays',
+    description: 'Professional cable management solutions for organized and efficient installations.'
+  },
+  {
+    src: '/images/Low-voltage(1).jpg',
+    alt: 'Low Voltage Panel System',
+    category: 'LV Panels',
+    description: 'Customized low voltage panel systems designed to meet specific project requirements.'
+  },
+  {
+    src: '/images/cable-trays(1).jpg',
+    alt: 'Cable Tray Installation',
+    category: 'Cable Trays',
+    description: 'Professional cable management solutions for organized and efficient installations.'
+  },
+  {
+    src: '/images/facility.jpg',
+    alt: 'Manufacturing Facility',
+    category: 'Facility',
+    description: 'Our cutting-edge manufacturing facility equipped with the latest technology.'
+  },
+  {
+    src: '/images/services.jpg',
+    alt: 'Testing Laboratory',
+    category: 'Testing',
+    description: 'Advanced testing laboratory ensuring highest quality standards.'
+  },
+  {
+    src: '/images/ct (1).jpg',
+    alt: 'Project Implementation',
+    category: 'Projects',
+    description: 'Successfully delivered projects across multiple states.'
+  }
+];
+
+const categories = [...new Set(images.map(img => img.category))];
+---
+
+<Layout
+  title="Product Gallery | Showcasing Excellence in Electrical Infrastructure"
+  description="Explore our comprehensive range of electrical infrastructure solutions through our immersive product gallery"
+>
+    <PageHeader
+    title="Gallery"
+    description="Explore our diverse portfolio of electrical infrastructure projects"
+    image="/images/facility.jpg"
+  />
+  
+
+  <div class="py-20" id="gallery">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-fadeIn animation-delay-150">
+          Explore Our Portfolio
+        </h2>
+        <p class="text-lg text-black/80 mb-12 animate-fadeIn animation-delay-300">
+          Each image represents a milestone in our journey of excellence, showcasing our commitment to superior electrical infrastructure solutions.
+        </p>
+        <CategoryFilter categories={categories} client:load />
+      </div>
+
+      <GalleryComponent images={images} />
+    </div>
+  </div>
+
+  <div class=" py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Infrastructure?</h2>
+        <p class="text-lg text-black/80 mb-8 max-w-2xl mx-auto">
+          Let's collaborate to bring your vision to life. Our team of experts is ready to guide you through your next project.
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex items-center px-8 py-4 bg-accent hover:bg-accent/90 text-white rounded-full text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+        >
+          Start Your Project
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeDown {
+  animation: fadeDown 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animation-delay-150 {
+  animation-delay: 150ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-450 {
+  animation-delay: 450ms;
+}
+</style>

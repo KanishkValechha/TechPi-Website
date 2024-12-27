@@ -1,0 +1,129 @@
+---
+interface Props {
+  categories: string[];
+}
+
+const { categories } = Astro.props;
+---
+
+<div 
+  class="flex flex-wrap justify-center gap-4 mb-12"
+  data-category-filter
+>
+  <button
+    class="relative px-6 py-3 rounded-full bg-accent text-white font-medium shadow-lg hover:shadow-xl hover:bg-accent/90 transform hover:-translate-y-0.5 transition-all duration-300 active overflow-hidden group"
+    data-category="all"
+  >
+    <span class="relative z-10">All</span>
+    <div class="absolute inset-0 bg-white/20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+  </button>
+  {categories.map(category => (
+    <button
+      class="relative px-6 py-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 overflow-hidden group"
+      data-category={category}
+    >
+      <span class="relative z-10">{category}</span>
+      <div class="absolute inset-0 bg-accent/10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+    </button>
+  ))}
+</div>
+
+<script>
+  function setupCategoryFilter() {
+    const filterContainer = document.querySelector('[data-category-filter]');
+    const filterButtons = document.querySelectorAll('[data-category-filter] button');
+    const galleryItems = document.querySelectorAll('[data-gallery-item]');
+    let activeCategory = 'all';
+
+    function updateActiveButton(selectedButton: Element) {
+      // Remove active styles from all buttons
+      filterButtons.forEach(btn => {
+        btn.classList.remove('bg-accent', 'text-white', 'active');
+        btn.classList.add('bg-gray-100', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-200');
+      });
+
+      // Add active styles to selected button
+      selectedButton.classList.remove('bg-gray-100', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-200');
+      selectedButton.classList.add('bg-accent', 'text-white', 'active');
+    }
+
+    function animateItems(category: string) {
+      galleryItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        const element = item as HTMLElement;
+        
+        if (category === 'all' || category === itemCategory) {
+          // Show item with animation
+          element.style.display = '';
+          setTimeout(() => {
+            element.style.transform = 'scale(1)';
+            element.style.opacity = '1';
+          }, 50);
+        } else {
+          // Hide item with animation
+          element.style.transform = 'scale(0.95)';
+          element.style.opacity = '0';
+          setTimeout(() => {
+            element.style.display = 'none';
+          }, 300);
+        }
+      });
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category') || 'all';
+        
+        if (category === activeCategory) return;
+        
+        activeCategory = category;
+        updateActiveButton(button);
+        animateItems(category);
+
+        // Add ripple effect
+        const ripple = document.createElement('div');
+        ripple.className = 'absolute inset-0 bg-white/20 animate-ripple rounded-full';
+        button.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 1000);
+
+        // Scroll into view if needed
+        const firstVisibleItem = document.querySelector(`[data-gallery-item][data-category="${category}"]`) ||
+                                document.querySelector('[data-gallery-item]');
+        firstVisibleItem?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    });
+
+    // Initialize all items to be visible
+    galleryItems.forEach(item => {
+      const element = item as HTMLElement;
+      element.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+      element.style.transform = 'scale(1)';
+      element.style.opacity = '1';
+    });
+  }
+
+  // Run setup on initial load and after Astro page transitions
+  setupCategoryFilter();
+  document.addEventListener('astro:page-load', setupCategoryFilter);
+</script>
+
+<style>
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(2.5);
+      opacity: 0;
+    }
+  }
+
+  .animate-ripple {
+    animation: ripple 1s cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
+
+  [data-gallery-item] {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+</style>
