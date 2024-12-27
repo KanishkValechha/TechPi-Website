@@ -74,9 +74,9 @@ const { images } = Astro.props;
         if (!img) return;
 
         const lightbox = document.createElement('div');
-        lightbox.className = 'fixed inset-0 z-50 bg-black/95 backdrop-blur-lg flex items-center justify-center opacity-0 transition-opacity duration-300 pt-24 px-4 pb-8';
+        lightbox.className = 'fixed inset-0 z-50 bg-black/95 backdrop-blur-lg flex items-center justify-center opacity-0 transition-opacity duration-300 pt-32 px-4 pb-8';
         lightbox.innerHTML = `
-          <div class="relative w-full max-w-4xl mx-auto transform scale-95 transition-transform duration-500">
+          <div class="relative w-full max-w-3xl mx-auto transform scale-95 transition-transform duration-500">
             <button class="absolute -top-12 right-0 text-white p-3 rounded-full hover:bg-white/10 transition-colors duration-300 group">
               <svg class="w-6 h-6 transform group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -85,7 +85,7 @@ const { images } = Astro.props;
             <img 
               src="${img.src}" 
               alt="${img.alt}" 
-              class="w-full h-auto max-h-[70vh] object-contain rounded-2xl shadow-2xl transform transition-transform duration-700"
+              class="w-full h-auto max-h-[60vh] object-contain rounded-2xl shadow-2xl transform transition-transform duration-700"
             />
             <div class="mt-4 text-white transform -translate-y-4 transition-transform duration-500 delay-200">
               ${category ? `<span class="inline-block px-4 py-1.5 bg-accent/90 rounded-full text-sm font-medium mb-3">${category}</span>` : ''}
