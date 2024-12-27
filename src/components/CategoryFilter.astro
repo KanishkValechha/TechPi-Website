@@ -42,21 +42,24 @@ const { categories } = Astro.props;
 
         const category = button.getAttribute('data-category');
         
+        // Modified filtering logic
         galleryItems.forEach(item => {
           const itemCategory = item.getAttribute('data-category');
           const element = item as HTMLElement;
           
           if (category === 'all' || category === itemCategory) {
-            element.style.display = '';
-            setTimeout(() => {
-              element.style.transform = 'scale(1)';
-              element.style.opacity = '1';
-            }, 50);
+            element.style.removeProperty('display');
+            element.style.removeProperty('transform');
+            element.style.removeProperty('opacity');
+            element.classList.remove('pointer-events-none');
           } else {
             element.style.transform = 'scale(0.95)';
             element.style.opacity = '0';
+            element.classList.add('pointer-events-none');
             setTimeout(() => {
-              element.style.display = 'none';
+              if (element.style.opacity === '0') {
+                element.style.display = 'none';
+              }
             }, 300);
           }
         });
@@ -67,8 +70,9 @@ const { categories } = Astro.props;
     galleryItems.forEach(item => {
       const element = item as HTMLElement;
       element.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-      element.style.transform = 'scale(1)';
-      element.style.opacity = '1';
+      element.style.removeProperty('transform');
+      element.style.removeProperty('opacity');
+      element.classList.remove('pointer-events-none');
     });
   }
 
