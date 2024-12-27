@@ -72,7 +72,7 @@ const categories = [...new Set(images.map(img => img.category))];
         <p class="text-lg text-black/80 mb-12 animate-fadeIn animation-delay-300">
           Each image represents a milestone in our journey of excellence, showcasing our commitment to superior electrical infrastructure solutions.
         </p>
-        <CategoryFilter categories={categories} client:load />
+        <CategoryFilter categories={categories} />
       </div>
 
       <GalleryComponent images={images} />
